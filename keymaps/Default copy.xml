@@ -1,0 +1,33 @@
+<keymap version="1" name="Default copy" parent="$default">
+  <action id="ChangesView.Diff" />
+  <action id="CheckinProject" />
+  <action id="CompareTwoFiles" />
+  <action id="Console.TableResult.CloneRow" />
+  <action id="Console.TableResult.CompareCells" />
+  <action id="DatabaseView.CopyAction" />
+  <action id="Diff.ShowDiff" />
+  <action id="Diff.ShowSettingsPopup" />
+  <action id="EditorAddOrRemoveCaret">
+    <mouse-shortcut keystroke="control button1" />
+  </action>
+  <action id="EditorDuplicate" />
+  <action id="FileChooser.GotoDesktop" />
+  <action id="GotoDeclaration">
+    <keyboard-shortcut first-keystroke="ctrl b" />
+    <mouse-shortcut keystroke="button2" />
+  </action>
+  <action id="RunDashboard.CopyConfiguration" />
+  <action id="SelectAllOccurrences">
+    <keyboard-shortcut first-keystroke="shift ctrl d" />
+  </action>
+  <action id="SelectNextOccurrence">
+    <keyboard-shortcut first-keystroke="ctrl d" />
+  </action>
+  <action id="SendEOF" />
+  <action id="TagDocumentationNavigation" />
+  <action id="Uml.ShowDiff" />
+  <action id="UnselectPreviousOccurrence">
+    <keyboard-shortcut first-keystroke="ctrl k" />
+  </action>
+  <action id="openAssertEqualsDiff" />
+</keymap>
