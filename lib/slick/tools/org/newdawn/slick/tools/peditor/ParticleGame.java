@@ -288,7 +288,7 @@ public class ParticleGame extends BasicGame {
 					25);
 			g.drawString("Max: " + max, 10, 40);
 			g.drawString(
-					"LMB: Position Emitter       RMB: Default Position", 20,
+					"LMB: Vector2 Emitter       RMB: Default Vector2", 20,
 					527);
 		}
 

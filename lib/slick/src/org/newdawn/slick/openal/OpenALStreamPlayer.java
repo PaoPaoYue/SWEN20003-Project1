@@ -50,7 +50,7 @@ public class OpenALStreamPlayer {
 	private URL url;
 	/** The pitch of the music */
 	private float pitch;
-	/** Position in seconds of the previously played buffers */
+	/** Vector2 in seconds of the previously played buffers */
 	private float positionOffset;
 	
 	/**
@@ -252,7 +252,7 @@ public class OpenALStreamPlayer {
 	/**
 	 * Seeks to a position in the music.
 	 * 
-	 * @param position Position in seconds.
+	 * @param position Vector2 in seconds.
 	 * @return True if the setting of the position was successful
 	 */
 	public boolean setPosition(float position) {

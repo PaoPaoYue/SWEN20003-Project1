@@ -195,7 +195,7 @@ public class TTFFile {
     }
 
     /**
-     * Position inputstream to position indicated
+     * Vector2 inputstream to position indicated
      * in the dirtab offset + offset
      * 
      * @param in The reader to read the tables from

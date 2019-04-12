@@ -9,7 +9,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 /**
- * A test to demonstrate shadowbuild.Main.world clipping as opposed to screen clipping
+ * A test to demonstrate shadowbuild.Main.control clipping as opposed to screen clipping
  *
  * @author kevin
  */
@@ -17,7 +17,7 @@ public class ClipTest extends BasicGame {
 
 	/** The current angle of rotation */
 	private float ang = 0;
-	/** True if we're showing shadowbuild.Main.world clipping */
+	/** True if we're showing shadowbuild.Main.control clipping */
 	private boolean world;
 	/** True if we're showing screen clipping */
 	private boolean clip;
@@ -51,7 +51,7 @@ public class ClipTest extends BasicGame {
 		g.setColor(Color.white);
 		g.drawString("1 - No Clipping", 100, 10);
 		g.drawString("2 - Screen Clipping", 100, 30);
-		g.drawString("3 - World Clipping", 100, 50);
+		g.drawString("3 - GameController Clipping", 100, 50);
 		
 		if (world) {
 			g.drawString("WORLD CLIPPING ENABLED", 200, 80);

@@ -244,7 +244,7 @@ public class ParticleEditor extends JFrame {
 		
 		tabs.add("Settings", settingsPanel);
 		tabs.add("Emission", emissionControls);
-		tabs.add("Position", positionControls);
+		tabs.add("Vector2", positionControls);
 		tabs.add("Rendering", colorPanel);
 		tabs.add("Limit", limitPanel);
 		tabs.add("Whiskas", whiskasPanel);

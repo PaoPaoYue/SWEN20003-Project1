@@ -65,7 +65,7 @@ public interface Audio {
 	/**
 	 * Seeks to a position in the music.
 	 * 
-	 * @param position Position in seconds.
+	 * @param position Vector2 in seconds.
 	 * @return True if the setting of the position was successful
 	 */
 	public boolean setPosition(float position);

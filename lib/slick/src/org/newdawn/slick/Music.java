@@ -381,7 +381,7 @@ public class Music {
 	 * Seeks to a position in the music. For streaming music, seeking before the current position causes 
 	 * the stream to be reloaded.
 	 * 
-	 * @param position Position in seconds.
+	 * @param position Vector2 in seconds.
 	 * @return True if the seek was successful
 	 */
 	public boolean setPosition(float position) {
