@@ -9,7 +9,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
- * A test to demonstrate shadowbuild.Main.world clipping as opposed to screen clipping
+ * A test to demonstrate shadowbuild.Main.control clipping as opposed to screen clipping
  *
  * @author kevin
  */

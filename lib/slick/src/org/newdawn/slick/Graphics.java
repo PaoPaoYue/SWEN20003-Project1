@@ -95,7 +95,7 @@ public class Graphics {
 	/** The graphics context clipping */
 	private Rectangle clip;
 
-	/** Buffer used for setting the shadowbuild.Main.world clip */
+	/** Buffer used for setting the shadowbuild.Main.control clip */
 	private DoubleBuffer worldClip = BufferUtils.createDoubleBuffer(4);
 
 	/** The buffer used to read a screen pixel */
@@ -104,7 +104,7 @@ public class Graphics {
 	/** True if we're antialias */
 	private boolean antialias;
 
-	/** The shadowbuild.Main.world clip recorded since last set */
+	/** The shadowbuild.Main.control clip recorded since last set */
 	private Rectangle worldClipRecord;
 
 	/** The current drawing mode */
@@ -703,9 +703,9 @@ public class Graphics {
 	}
 
 	/**
-	 * Set clipping that controls which areas of the shadowbuild.Main.world will be drawn to.
-	 * Note that shadowbuild.Main.world clip is different from standard screen clip in that it's
-	 * defined in the space of the current shadowbuild.Main.world coordinate - i.e. it's affected
+	 * Set clipping that controls which areas of the shadowbuild.Main.control will be drawn to.
+	 * Note that shadowbuild.Main.control clip is different from standard screen clip in that it's
+	 * defined in the space of the current shadowbuild.Main.control coordinate - i.e. it's affected
 	 * by translate, rotate, scale etc.
 	 * 
 	 * @param x
@@ -738,7 +738,7 @@ public class Graphics {
 	}
 
 	/**
-	 * Clear shadowbuild.Main.world clipping setup. This does not effect screen clipping
+	 * Clear shadowbuild.Main.control clipping setup. This does not effect screen clipping
 	 */
 	public void clearWorldClip() {
 		predraw();
@@ -751,7 +751,7 @@ public class Graphics {
 	}
 
 	/**
-	 * Set the shadowbuild.Main.world clip to be applied
+	 * Set the shadowbuild.Main.control clip to be applied
 	 * 
 	 * @see #setWorldClip(float, float, float, float)
 	 * @param clip
@@ -767,9 +767,9 @@ public class Graphics {
 	}
 
 	/**
-	 * Get the last set shadowbuild.Main.world clip or null of the shadowbuild.Main.world clip isn't set
+	 * Get the last set shadowbuild.Main.control clip or null of the shadowbuild.Main.control clip isn't set
 	 * 
-	 * @return The last set shadowbuild.Main.world clip rectangle
+	 * @return The last set shadowbuild.Main.control clip rectangle
 	 */
 	public Rectangle getWorldClip() {
 		return worldClipRecord;

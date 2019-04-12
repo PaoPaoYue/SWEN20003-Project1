@@ -331,13 +331,13 @@ public class GraphEditorWindow extends JPanel {
 		private float viewportMinY;
 		/** The graph viewport maximum y value */
 		private float viewportMaxY;
-		/** The graph shadowbuild.Main.world minimum x value */
+		/** The graph shadowbuild.Main.control minimum x value */
 		private float worldMinX = 0.0f;
-		/** The graph shadowbuild.Main.world maximum x value */
+		/** The graph shadowbuild.Main.control maximum x value */
 		private float worldMaxX = 1.0f;
-		/** The graph shadowbuild.Main.world minimum y value */
+		/** The graph shadowbuild.Main.control minimum y value */
 		private float worldMinY = 0.0f;
-		/** The graph shadowbuild.Main.world maximum y value */
+		/** The graph shadowbuild.Main.control maximum y value */
 		private float worldMaxY = 255.0f;
 
 		/** The border size on the x axis */
@@ -644,7 +644,7 @@ public class GraphEditorWindow extends JPanel {
 		}
 
 		/**
-		 * Convert given control point from shadowbuild.Main.world to viewport coordinates
+		 * Convert given control point from shadowbuild.Main.control to viewport coordinates
 		 * 
 		 * @param in The point to convert  
 		 * @return A new control point representing the point in view space
@@ -660,10 +660,10 @@ public class GraphEditorWindow extends JPanel {
 		}
 
 		/**
-		 * Convert the given point in view space into shadowbuild.Main.world space
+		 * Convert the given point in view space into shadowbuild.Main.control space
 		 * 
 		 * @param view The point to convert 
-		 * @return A new control point that represent the point in shadowbuild.Main.world space
+		 * @return A new control point that represent the point in shadowbuild.Main.control space
 		 */
 		public CurvePoint viewToWorld(CurvePoint view) {
 			float sx = (viewportMaxX - viewportMinX) / (worldMaxX - worldMinX);
@@ -1049,36 +1049,36 @@ public class GraphEditorWindow extends JPanel {
 		}
 
 		/**
-		 * Get the shadowbuild.Main.world minimum y value
+		 * Get the shadowbuild.Main.control minimum y value
 		 * 
-		 * @return The shadowbuild.Main.world minimum y value
+		 * @return The shadowbuild.Main.control minimum y value
 		 */
 		public float getWorldMinY() {
 			return worldMinY;
 		}
 
 		/**
-		 * Set the shadowbuild.Main.world minimum y value
+		 * Set the shadowbuild.Main.control minimum y value
 		 * 
-		 * @param worldMinY The shadowbuild.Main.world minimum y value
+		 * @param worldMinY The shadowbuild.Main.control minimum y value
 		 */
 		public void setWorldMinY(float worldMinY) {
 			this.worldMinY = worldMinY;
 		}
 
 		/**
-		 * Get the shadowbuild.Main.world maximum y value
+		 * Get the shadowbuild.Main.control maximum y value
 		 * 
-		 * @return The shadowbuild.Main.world maximum y value
+		 * @return The shadowbuild.Main.control maximum y value
 		 */
 		public float getWorldMaxY() {
 			return worldMaxY;
 		}
 
 		/**
-		 * Set the shadowbuild.Main.world maximum y value
+		 * Set the shadowbuild.Main.control maximum y value
 		 * 
-		 * @param worldMaxY The shadowbuild.Main.world maximum y value
+		 * @param worldMaxY The shadowbuild.Main.control maximum y value
 		 */
 		public void setWorldMaxY(float worldMaxY) {
 			this.worldMaxY = worldMaxY;

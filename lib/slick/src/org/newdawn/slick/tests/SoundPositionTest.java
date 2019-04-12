@@ -28,7 +28,7 @@ public class SoundPositionTest extends BasicGame {
 	 * Create a new test for sounds
 	 */
 	public SoundPositionTest() {
-		super("Music Position Test");
+		super("Music Vector2 Test");
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class SoundPositionTest extends BasicGame {
 	 */
 	public void render(GameContainer container, Graphics g) {
 		g.setColor(Color.white);
-		g.drawString("Position: "+music.getPosition(), 100,100);
+		g.drawString("Vector2: "+music.getPosition(), 100,100);
 		g.drawString("Space - Pause/Resume", 100,130);
 		g.drawString("Right Arrow - Advance 5 seconds", 100, 145);
 	}
