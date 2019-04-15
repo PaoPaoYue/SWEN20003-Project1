@@ -40,18 +40,6 @@ public abstract class RectSprite extends Sprite{
         region.setPos(pos);
     }
 
-    public Rect getRegion() {
-        return region;
-    }
-
-    public void setRegionWidth(double width) {
-        region.setWidth(width);
-    }
-
-    public void setRegionHeight(double height) {
-        region.setHeight(height);
-    }
-
     public Image getImage() {
         return image;
     }
@@ -60,13 +48,13 @@ public abstract class RectSprite extends Sprite{
         this.image = image;
     }
 
-    public int getLayerIndex() {
-        return layerIndex;
-    }
-
-    public void setLayerIndex(int layerIndex) {
-        this.layerIndex = layerIndex;
-    }
+//    public int getLayerIndex() {
+//        return layerIndex;
+//    }
+//
+//    public void setLayerIndex(int layerIndex) {
+//        this.layerIndex = layerIndex;
+//    }
 
 //    @Override
 //    public boolean collide(Sprite sprite) {

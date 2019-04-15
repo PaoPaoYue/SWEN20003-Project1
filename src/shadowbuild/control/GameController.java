@@ -5,14 +5,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
-import org.newdawn.slick.util.Log;
 import shadowbuild.camera.Camera;
 import shadowbuild.sprite.RectSprite;
 import shadowbuild.sprite.Sprite;
 import shadowbuild.terrain.Terrain;
-
-import java.util.Comparator;
-import java.util.PriorityQueue;
 
 /**
  * This class should be used to contain all the different objects in your game control, and schedule their interactions.
@@ -37,12 +33,12 @@ public class GameController {
         mainCamera = new Camera();
         spritesController = new SpritesController();
         _instance = this;
+        GameCoordinate.reset();
     }
 
     public void init(GameContainer gc) throws SlickException {
         spritesController.init(gc);
         mainCamera.init(gc);
-        GameCoordinate.reset();
     }
 
     public void update(Input input, int delta) throws SlickException {

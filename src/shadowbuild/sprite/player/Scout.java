@@ -3,6 +3,7 @@ package shadowbuild.sprite.player;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import shadowbuild.control.GameController;
+import shadowbuild.control.GameCoordinate;
 import shadowbuild.sprite.*;
 import shadowbuild.util.*;
 
@@ -16,20 +17,24 @@ public class Scout extends RectSprite{
 
     @Override
     public void init() {
-        setPos(new Vector2(GameController.getInstance().mainTerrain.getWidth()/2,
-                GameController.getInstance().mainTerrain.getHeight()/2));
+        setPos(new Vector2(GameCoordinate.WORLD_MIDDLE_X, GameCoordinate.WORLD_MIDDLE_Y));
     }
 
     @Override
     public void update(Input input, int delta) {
         if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
-            double x = input.getMouseX() + GameController.getInstance().mainCamera.getScope().getX();
-            double y = input.getMouseY() + GameController.getInstance().mainCamera.getScope().getY();
-            final Vector2 destiny = new Vector2(x, y);
-            setTask(((sprite, task, delta1) -> {
-                if(moveTowards(destiny, SPEED * delta1))
-                    task.stop();
-            }));
+            final Vector2 destiny = GameCoordinate.screenToWorld(new Vector2(input.getMouseX(), input.getMouseY()));
+            if (input.isKeyDown(Input.KEY_LSHIFT)) {
+                addTask(((sprite, task, delta1) -> {
+                    if(!moveTowards(destiny, SPEED * delta1))
+                        task.stop();
+                }));
+            } else {
+                setTask(((sprite, task, coroutineDelta) -> {
+                    if(!moveTowards(destiny, SPEED * coroutineDelta))
+                        task.stop();
+                }));
+            }
         }
     }
 }

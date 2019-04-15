@@ -21,32 +21,16 @@ public class Rect {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double getY() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public double getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
     public double getHeight() {
         return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
     }
 
     public double getMaxX() {
@@ -64,14 +48,12 @@ public class Rect {
     public void setPos(Vector2 pos) {x = pos.getX() - width/2; y = pos.getY() - height/2;}
 
     public void move(Vector2 orientation, double distance) {
-        Vector2 pos = getPos();
-        pos.move(orientation, distance);
+        Vector2 pos = getPos().move(orientation, distance);
         setPos(pos);
     }
 
     public void moveTowards(Vector2 destination, double distance) {
-        Vector2 pos = getPos();
-        pos.moveTowards(destination, distance);
+        Vector2 pos = getPos().moveTowards(destination, distance);
         setPos(pos);
     }
 

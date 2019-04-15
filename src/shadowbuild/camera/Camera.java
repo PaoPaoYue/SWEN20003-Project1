@@ -7,6 +7,7 @@ import shadowbuild.control.GameController;
 import shadowbuild.control.GameCoordinate;
 import shadowbuild.control.SpritesController;
 import shadowbuild.main.App;
+import shadowbuild.sprite.Sprite;
 import shadowbuild.util.Rect;
 import shadowbuild.util.Vector2;
 
@@ -19,6 +20,7 @@ import shadowbuild.util.Vector2;
 public class Camera {
 
     private Rect scope;
+    private Sprite followTarget;
 
     public Camera() {
         scope = new Rect(0, 0, App.WINDOW_WIDTH, App.WINDOW_HEIGHT);
@@ -38,8 +40,53 @@ public class Camera {
         scope.setPos(pos);
     }
 
+    public Boolean isFollow() {
+        return followTarget != null;
+    }
+
+    public void follow(Sprite followTarget) {
+        this.followTarget = followTarget;
+    }
+
+    public void unFollow() {
+        this.followTarget = null;
+    }
+
     public void move(Vector2 orientation, double distance) {
         scope.move(orientation, distance);
+    }
+
+    public void init(GameContainer gc) {
+        setPos(new Vector2(GameCoordinate.WORLD_MIDDLE_X, GameCoordinate.WORLD_MIDDLE_Y));
+        follow(SpritesController.getInstance().mainPlayer);
+    }
+
+    public void update(Input input, int delta) {
+        if(App.DEBUG) {
+            if(input.isKeyDown(Input.KEY_D)) {
+                unFollow();
+                scope.move(Vector2.RIGHT, delta * 0.5);
+            }
+            if(input.isKeyDown(Input.KEY_A)) {
+                unFollow();
+                scope.move(Vector2.LEFT, delta * 0.5);
+            }
+            if(input.isKeyDown(Input.KEY_W)) {
+                unFollow();
+                scope.move(Vector2.UP, delta * 0.5);
+            }
+            if(input.isKeyDown(Input.KEY_S)) {
+                unFollow();
+                scope.move(Vector2.DOWN, delta * 0.5);
+            }
+        }
+        if (input.isKeyDown(Input.KEY_SPACE)) {
+            follow(SpritesController.getInstance().mainPlayer);
+        }
+        if (isFollow()){
+            setPos(followTarget.getPos());
+        }
+        clamp();
     }
 
     private void clamp() {
@@ -60,31 +107,6 @@ public class Camera {
         else if(y != 0)
             setPos(new Vector2(scope.getPos().getX(), y));
     }
-
-    public void init(GameContainer gc) {
-        setPos(new Vector2(GameCoordinate.WORLD_MIDDLE_X, GameCoordinate.WORLD_MIDDLE_Y));
-    }
-
-    public void update(Input input, int delta) {
-//        if(App.DEBUG) {
-//            if(input.isKeyDown(Input.KEY_RIGHT)) {
-//                scope.move(Vector2.RIGHT, delta * 0.5);
-//            }
-//            if(input.isKeyDown(Input.KEY_LEFT)) {
-//                scope.move(Vector2.LEFT, delta * 0.5);
-//            }
-//            if(input.isKeyDown(Input.KEY_UP)) {
-//                scope.move(Vector2.UP, delta * 0.5);
-//            }
-//            if(input.isKeyDown(Input.KEY_DOWN)) {
-//                scope.move(Vector2.DOWN, delta * 0.5);
-//            }
-//        }
-        setPos(SpritesController.getInstance().mainPlayer.getPos());
-        clamp();
-    }
-
-
 
 }
 

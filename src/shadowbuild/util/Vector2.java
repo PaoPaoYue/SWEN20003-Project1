@@ -19,29 +19,23 @@ public class Vector2 {
     }
 
     public Vector2(Vector2 origin) {
-        x = origin.x;
-        y = origin.y;
+        if(origin != null){
+            x = origin.x;
+            y = origin.y;
+        }
     }
 
     public Vector2(double x, double y) {
-        setX(x);
-        setY(y);
+        this.x = x;
+        this.y = y;
     }
 
     public double getX() {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double getY() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public Vector2 subtract(Vector2 v) {
@@ -58,29 +52,26 @@ public class Vector2 {
 
     public Double distance(Vector2 v) {
         Vector2 subV = subtract(v);
-        return Math.sqrt(subV.getX() * subV.getX() + subV.getY() * subV.getY());
+        return Math.sqrt(subV.x * subV.x + subV.y * subV.y);
     }
 
     public Vector2 orientation(Vector2 v) {
         Vector2 subV = v.subtract(this);
         Double dist = Math.sqrt(subV.getX() * subV.getX() + subV.getY() * subV.getY());
-        subV.setX(subV.getX()/dist);
-        subV.setY(subV.getY()/dist);
+        subV.x = subV.x/dist;
+        subV.y = subV.y/dist;
         return subV;
     }
 
-    public void move(Vector2 orientation, double distance) {
-        Vector2 res = this.add(orientation.multiply(distance));
-        x = res.x;
-        y = res.y;
+    public Vector2 move(Vector2 orientation, double distance) {
+        return this.add(orientation.multiply(distance));
     }
 
-    public void moveTowards(Vector2 destination, double distance) {
+    public Vector2 moveTowards(Vector2 destination, double distance) {
         if(distance(destination) > distance) {
-            move(orientation(destination), distance);
+            return move(orientation(destination), distance);
         } else {
-            x = destination.x;
-            y = destination.y;
+            return new Vector2(destination);
         }
     }
 

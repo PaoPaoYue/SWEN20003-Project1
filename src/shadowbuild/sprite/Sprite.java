@@ -27,23 +27,21 @@ public abstract class Sprite {
     }
 
     public boolean move(Vector2 orientation, double distance) {
-        Vector2 pos = getPos();
-        pos.move(orientation, distance);
+        Vector2 pos = getPos().move(orientation, distance);
         if(GameController.getInstance().mainTerrain.collide(pos))
-            return true;
+            return false;
         setPos(pos);
-        return false;
+        return true;
     }
 
     public boolean moveTowards(Vector2 destination, double distance) {
-        Vector2 pos = getPos();
-        pos.moveTowards(destination, distance);
+        Vector2 pos = getPos().moveTowards(destination, distance);
         if(GameController.getInstance().mainTerrain.collide(pos))
-            return true;
+            return false;
         else if(getPos().equals(pos))
-            return true;
+            return false;
         setPos(pos);
-        return false;
+        return true;
     }
 
 //    public boolean collide(Sprite sprite) {

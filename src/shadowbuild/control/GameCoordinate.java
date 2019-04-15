@@ -4,8 +4,8 @@ import shadowbuild.main.App;
 import shadowbuild.util.Vector2;
 
 public class GameCoordinate {
-    public static int ORIGINX = 0;
-    public static int ORIGINY = 0;
+    public static final int ORIGINX = 0;
+    public static final int ORIGINY = 0;
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
     public static int SCREEN_MIDDLE_X;
