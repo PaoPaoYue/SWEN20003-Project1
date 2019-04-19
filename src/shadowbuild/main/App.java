@@ -17,16 +17,14 @@ import shadowbuild.control.GameController;
 /**
  * Main class for the game.
  * Handles initialisation, input and rendering.
- *
- * You are unlikely to need to change this class, but you can if you so choose.
  */
 public class App extends BasicGame {
     /** window width, in pixels */
     public static final int WINDOW_WIDTH = 1024;
     /** window height, in pixels */
     public static final int WINDOW_HEIGHT = 768;
-
-    public static boolean DEBUG = true;
+    /** Developer mode */
+    public static boolean DEBUG = false;
 
     public GameController game;
 

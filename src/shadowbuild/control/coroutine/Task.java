@@ -2,7 +2,11 @@ package shadowbuild.control.coroutine;
 
 import shadowbuild.sprite.Sprite;
 
-
+/**
+ * This class defines a simple coroutine task
+ * Accept a executor interface and override it to define the task behaviour
+ * Call stop method to exit the task and proceed to the next
+ */
 public class Task {
     private boolean active = true;
     TaskExecutor executor;

@@ -4,24 +4,19 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 import shadowbuild.camera.Camera;
-import shadowbuild.sprite.RectSprite;
-import shadowbuild.sprite.Sprite;
 import shadowbuild.terrain.Terrain;
 
 /**
  * This class should be used to contain all the different objects in your game control, and schedule their interactions.
- *
- * You are free to make ANY modifications you see fit.
- * These classes are provided simply as a starting point. You are not strictly required to use them.
  */
 public class GameController {
 
-    public Terrain mainTerrain;
-    public Camera mainCamera;
-    public SpritesController spritesController;
+    private Terrain mainTerrain;
+    private Camera mainCamera;
+    private SpritesController spritesController;
 
+    /** Singleton pattern */
     private static GameController _instance;
 
     public static GameController getInstance(){
@@ -29,16 +24,24 @@ public class GameController {
     }
 
     public GameController() throws SlickException {
-        mainTerrain = new Terrain(new TiledMap("assets/main.tmx"));
+        mainTerrain = new Terrain();
         mainCamera = new Camera();
         spritesController = new SpritesController();
         _instance = this;
-        GameCoordinate.reset();
+    }
+
+    public Terrain getMainTerrain() {
+        return mainTerrain;
+    }
+
+    public Camera getMainCamera() {
+        return mainCamera;
     }
 
     public void init(GameContainer gc) throws SlickException {
-        spritesController.init(gc);
-        mainCamera.init(gc);
+        GameCoordinate.reset();
+        spritesController.init();
+        mainCamera.init();
     }
 
     public void update(Input input, int delta) throws SlickException {

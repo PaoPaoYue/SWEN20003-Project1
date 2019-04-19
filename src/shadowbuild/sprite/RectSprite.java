@@ -1,23 +1,19 @@
 package shadowbuild.sprite;
 
-import org.lwjgl.Sys;
 import org.newdawn.slick.Image;
 import shadowbuild.camera.Camera;
-import shadowbuild.control.GameController;
 import shadowbuild.control.GameCoordinate;
 import shadowbuild.util.*;
 
-// more specific version of sprite
-// define the region of the sprite and image source
+/**
+ * More specific version of sprite
+ * Define the region of the sprite and image source
+ */
 public abstract class RectSprite extends Sprite{
-    Rect region;
-    Image image;
-    int layerIndex;
-
-    public RectSprite() {
-        super();
-        region = new Rect();
-    }
+    /** The region of the sprite for collision detecting */
+    private Rect region;
+    /** The image to render */
+    private Image image;
 
     public RectSprite(Image image) {
         super();
@@ -28,6 +24,7 @@ public abstract class RectSprite extends Sprite{
     public RectSprite(Vector2 pos, Image image) {
         this.image = image;
         region = new Rect(0, 0, image.getWidth(), image.getHeight());
+        region.setPos(pos);
     }
 
     @Override
@@ -44,17 +41,10 @@ public abstract class RectSprite extends Sprite{
         return image;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public Rect getRegion() {
+        return region;
     }
 
-//    public int getLayerIndex() {
-//        return layerIndex;
-//    }
-//
-//    public void setLayerIndex(int layerIndex) {
-//        this.layerIndex = layerIndex;
-//    }
 
 //    @Override
 //    public boolean collide(Sprite sprite) {
@@ -66,12 +56,12 @@ public abstract class RectSprite extends Sprite{
 //        return region.collide(sprite.getRect());
 //    }
 
+    /** render the rectSprite to the screen */
     public void render(Camera camera) {
+        /** only render if the image specified and inside the view of camera */
         if(image != null && region.collide(camera.getScope())) {
-            Vector2 renderStart = GameCoordinate.worldToScreen(new Vector2(
-            getPos().getX() - image.getWidth()/2,getPos().getY() - image.getHeight()/2
-            ));
-            image.draw((float) renderStart.getX(), (float)renderStart.getY());
+            Vector2 renderStart = GameCoordinate.worldToScreen(new Vector2(getPos().getX(),getPos().getY()));
+            image.drawCentered((float) renderStart.getX(), (float)renderStart.getY());
         }
     }
 

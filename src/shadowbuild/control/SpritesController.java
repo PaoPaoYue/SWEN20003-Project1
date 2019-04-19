@@ -1,24 +1,28 @@
 package shadowbuild.control;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import shadowbuild.camera.Camera;
 import shadowbuild.control.coroutine.Task;
-import shadowbuild.control.coroutine.TaskExecutor;
 import shadowbuild.sprite.RectSprite;
 import shadowbuild.sprite.Sprite;
 import shadowbuild.sprite.player.Scout;
 
 import java.util.*;
 
+/**
+ * This class is to contain all the sprites and control their behaviours
+ */
 public class SpritesController {
 
-    public Sprite mainPlayer;
+    /** The player which needs to follow */
+    private Sprite mainPlayer;
+    /** All sprites */
     private ArrayList<Sprite> sprites;
+    /** All coroutine tasks */
     private HashMap<Sprite, Queue<Task>> tasks;
 
+    /** Singleton pattern */
     private static SpritesController _instance;
 
     public static SpritesController getInstance(){
@@ -31,18 +35,26 @@ public class SpritesController {
         _instance = this;
     }
 
-    public void init(GameContainer gc) throws SlickException {
-        mainPlayer = new Scout(new Image("assets/scout.png"));
+    public Sprite getMainPlayer() {
+        return mainPlayer;
+    }
+
+    public void init() throws SlickException {
+        /** instantiate all sprites */
+        mainPlayer = new Scout();
         sprites.add(mainPlayer);
+        /** call init function on all sprites */
         for (Sprite sprite: sprites) {
             sprite.init();
         }
     }
 
     public void update(Input input, int delta) {
+        /** update all sprites */
         for (Sprite sprite: sprites) {
             sprite.update(input, delta);
         }
+        /** update all coroutine tasks on each sprites */
         for(Map.Entry<Sprite, Queue<Task>> entry : tasks.entrySet()) {
             Sprite sprite = entry.getKey();
             Queue<Task> qp = entry.getValue();
@@ -51,39 +63,26 @@ public class SpritesController {
             if(task.expired())
                 qp.poll();
             if(qp.isEmpty())
-                removeTask(sprite);
-
+                clearTask(sprite);
         }
     }
 
     public void render(Camera camera) {
-//        sprites.sort(new Comparator<Sprite>() {
-//            @Override
-//            public int compare(Sprite o1, Sprite o2) {
-//                int layer1 = o1 instanceof RectSprite? ((RectSprite)o1).getLayerIndex(): Integer.MIN_VALUE;
-//                int layer2 = o2 instanceof RectSprite? ((RectSprite)o2).getLayerIndex(): Integer.MIN_VALUE;
-//                if(layer2 - layer1 != 0){
-//                    return layer2 - layer1;
-//                }
-//                else {
-//                    return o2.getPos().subtract(o1.getPos()).getY() < 0? -1: 1;
-//                }
-//            }
-//        });
+        /** render all rectSprites */
         for (Sprite sprite: sprites) {
             if (sprite instanceof RectSprite)
                 ((RectSprite)sprite).render(camera);
-            else
-                break;
         }
     }
 
+    /** reset all the coroutine task on a specif sprite */
     public void setTask(Sprite sprite, Task task) {
         Queue<Task> qp = new LinkedList<>();
         qp.offer(task);
         tasks.put(sprite, qp);
     }
 
+    /** add a task to the task queue of that sprite */
     public void addTask(Sprite sprite, Task task) {
         if(tasks.containsKey(sprite))
             tasks.get(sprite).offer(task);
@@ -91,7 +90,8 @@ public class SpritesController {
             setTask(sprite, task);
     }
 
-    public void removeTask(Sprite sprite) {
+    /** clear all the current task performed on that sprite */
+    public void clearTask(Sprite sprite) {
         tasks.remove(sprite);
     }
 

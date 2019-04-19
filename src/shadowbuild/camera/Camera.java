@@ -1,9 +1,6 @@
 package shadowbuild.camera;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import shadowbuild.control.GameController;
 import shadowbuild.control.GameCoordinate;
 import shadowbuild.control.SpritesController;
 import shadowbuild.main.App;
@@ -13,13 +10,12 @@ import shadowbuild.util.Vector2;
 
 /**
  * This class should be used to restrict the game's view to a subset of the entire control.
- *
- * You are free to make ANY modifications you see fit.
- * These classes are provided simply as a starting point. You are not strictly required to use them.
  */
 public class Camera {
 
+    /** The scope of the game's view */
     private Rect scope;
+    /** The target the camera should follow */
     private Sprite followTarget;
 
     public Camera() {
@@ -56,9 +52,9 @@ public class Camera {
         scope.move(orientation, distance);
     }
 
-    public void init(GameContainer gc) {
+    public void init() {
         setPos(new Vector2(GameCoordinate.WORLD_MIDDLE_X, GameCoordinate.WORLD_MIDDLE_Y));
-        follow(SpritesController.getInstance().mainPlayer);
+        follow(SpritesController.getInstance().getMainPlayer());
     }
 
     public void update(Input input, int delta) {
@@ -79,34 +75,31 @@ public class Camera {
                 unFollow();
                 scope.move(Vector2.DOWN, delta * 0.5);
             }
+            if (input.isKeyDown(Input.KEY_SPACE)) {
+                follow(SpritesController.getInstance().getMainPlayer());
+            }
         }
-        if (input.isKeyDown(Input.KEY_SPACE)) {
-            follow(SpritesController.getInstance().mainPlayer);
-        }
+        /** Move along with the followTarget */
         if (isFollow()){
             setPos(followTarget.getPos());
         }
+        /** Restrict the camera movement */
         clamp();
     }
 
     private void clamp() {
-        double x = 0;
-        double y = 0;
-        if(scope.getX() < 0)
-            x = GameCoordinate.SCREEN_MIDDLE_X;
+        /** Stop when reach the left */
+        if(scope.getX() < GameCoordinate.ORIGIN_X)
+            scope.setX(GameCoordinate.ORIGIN_X);
+        /** Stop when reach the right */
         else if(scope.getMaxX() > GameCoordinate.WORLD_WIDTH)
-            x = GameCoordinate.WORLD_WIDTH - GameCoordinate.SCREEN_MIDDLE_X;
-        if(scope.getY() < 0)
-            y = GameCoordinate.SCREEN_MIDDLE_Y;
+            scope.setMaxX(GameCoordinate.WORLD_WIDTH);
+        /** Stop when reach the top */
+        if(scope.getY() < GameCoordinate.ORIGIN_X)
+            scope.setY(GameCoordinate.ORIGIN_X);
+        /** Stop when reach the bottom */
         else if(scope.getMaxY() > GameCoordinate.WORLD_HEIGHT)
-            y = GameCoordinate.WORLD_HEIGHT - GameCoordinate.SCREEN_MIDDLE_Y;
-        if(x != 0 && y != 0)
-            setPos(new Vector2(x, y));
-        else if(x != 0)
-            setPos(new Vector2(x, scope.getPos().getY()));
-        else if(y != 0)
-            setPos(new Vector2(scope.getPos().getX(), y));
+            scope.setMaxY(GameCoordinate.WORLD_HEIGHT);
     }
-
 }
 
