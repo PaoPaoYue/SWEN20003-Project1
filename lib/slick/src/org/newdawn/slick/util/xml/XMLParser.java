@@ -26,7 +26,7 @@ public class XMLParser {
 	}
 	
 	/**
-	 * Parse the XML document located by the slick resource loader using the
+	 * Parse the XML document located by the slick Resource loader using the
 	 * reference given.
 	 * 
 	 * @param ref The reference to the XML document

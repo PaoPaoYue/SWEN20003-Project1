@@ -79,7 +79,7 @@ public class EffectUtil {
 	 * 
 	 * @param name The name of the dialog to show
 	 * @param currentValue The current value to be displayed
-	 * @param description The help text to provide
+	 * @param description The helper text to provide
 	 * @return The value selected by the user
 	 */
 	static public Value intValue (String name, final int currentValue, final String description) {
@@ -100,7 +100,7 @@ public class EffectUtil {
 	 * 
 	 * @param name The name of the dialog to show
 	 * @param currentValue The current value to be displayed
-	 * @param description The help text to provide
+	 * @param description The helper text to provide
 	 * @param min The minimum value to allow
 	 * @param max The maximum value to allow
 	 * @return The value selected by the user
@@ -124,7 +124,7 @@ public class EffectUtil {
 	 * 
 	 * @param name The name of the dialog to show
 	 * @param currentValue The current value to be displayed
-	 * @param description The help text to provide
+	 * @param description The helper text to provide
 	 * @return The value selected by the user
 	 */
 	static public Value booleanValue (String name, final boolean currentValue, final String description) {

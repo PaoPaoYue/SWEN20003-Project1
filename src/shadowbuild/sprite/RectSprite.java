@@ -9,22 +9,20 @@ import shadowbuild.util.*;
  * More specific version of sprite
  * Define the region of the sprite and image source
  */
-public abstract class RectSprite extends Sprite{
+public abstract class RectSprite extends Sprite implements Renderable{
     /** The region of the sprite for collision detecting */
     private Rect region;
     /** The image to render */
     private Image image;
 
     public RectSprite(Image image) {
-        super();
         this.image = image;
         region = new Rect(0, 0, image.getWidth(), image.getHeight());
     }
 
     public RectSprite(Vector2 pos, Image image) {
-        this.image = image;
-        region = new Rect(0, 0, image.getWidth(), image.getHeight());
-        region.setPos(pos);
+        this(image);
+        setPos(pos);
     }
 
     @Override
@@ -41,22 +39,14 @@ public abstract class RectSprite extends Sprite{
         return image;
     }
 
-    public Rect getRegion() {
-        return region;
+    public void setImage(Image image) {
+        this.image = image;
+        region.setWidth(image.getWidth());
+        region.setHeight(image.getHeight());
     }
 
-
-//    @Override
-//    public boolean collide(Sprite sprite) {
-//        return region.collide(sprite.getPos());
-//    }
-//
-//    @Override
-//    public boolean collide(RectSprite sprite) {
-//        return region.collide(sprite.getRect());
-//    }
-
     /** render the rectSprite to the screen */
+    @Override
     public void render(Camera camera) {
         /** only render if the image specified and inside the view of camera */
         if(image != null && region.collide(camera.getScope())) {

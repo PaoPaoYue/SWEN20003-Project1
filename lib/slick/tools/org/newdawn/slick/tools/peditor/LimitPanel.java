@@ -21,7 +21,7 @@ public class LimitPanel extends ControlPanel {
 	public LimitPanel(EmitterList l) {
 		setLayout(null);
 		
-		lengthPanel = new MinMaxPanel("Effect Length",0,100000,1000,1000,true,-1,"The length the effect will last");
+		lengthPanel = new MinMaxPanel("Highlight Length",0,100000,1000,1000,true,-1,"The length the effect will last");
 		addMinMax("length", lengthPanel);
 		emitCountPanel = new MinMaxPanel("Particle Emission Count",0,100000,1000,1000,true,-1,"The number of particles that will be emitted during the effect");
 		addMinMax("emitCount", emitCountPanel);

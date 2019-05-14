@@ -11,19 +11,19 @@ import java.net.URL;
 public interface ResourceLocation {
 
 	/**
-	 * Get a resource as an input stream
+	 * Get a Resource as an input stream
 	 * 
-	 * @param ref The reference to the resource to retrieve
-	 * @return A stream from which the resource can be read or
-	 * null if the resource can't be found in this location
+	 * @param ref The reference to the Resource to retrieve
+	 * @return A stream from which the Resource can be read or
+	 * null if the Resource can't be found in this location
 	 */
 	public InputStream getResourceAsStream(String ref);
 
 	/**
-	 * Get a resource as a URL
+	 * Get a Resource as a URL
 	 * 
-	 * @param ref The reference to the resource to retrieve
-	 * @return A URL from which the resource can be read
+	 * @param ref The reference to the Resource to retrieve
+	 * @return A URL from which the Resource can be read
 	 */
 	public URL getResource(String ref);
 }

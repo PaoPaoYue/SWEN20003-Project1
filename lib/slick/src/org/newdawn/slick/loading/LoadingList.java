@@ -58,9 +58,9 @@ public class LoadingList {
 	}
 	
 	/**
-	 * Add a resource to be loaded at some later date
+	 * Add a Resource to be loaded at some later date
 	 * 
-	 * @param resource The resource to be added
+	 * @param resource The Resource to be added
 	 */
 	public void add(DeferredResource resource) {
 		total++;
@@ -68,13 +68,13 @@ public class LoadingList {
 	}
 	
 	/**
-	 * Remove a resource from the list that has been loaded for
+	 * Remove a Resource from the list that has been loaded for
 	 * other reasons.
 	 * 
-	 * @param resource The resource to remove
+	 * @param resource The Resource to remove
 	 */
 	public void remove(DeferredResource resource) {
-		Log.info("Early loading of deferred resource due to req: "+resource.getDescription());
+		Log.info("Early loading of deferred Resource due to req: "+resource.getDescription());
 		total--;
 		deferred.remove(resource);
 	}
@@ -98,9 +98,9 @@ public class LoadingList {
 	}
 	
 	/**
-	 * Get the next resource that requries loading
+	 * Get the next Resource that requries loading
 	 * 
-	 * @return The next resource to load or null if there are no more remaining
+	 * @return The next Resource to load or null if there are no more remaining
 	 */
 	public DeferredResource getNext() {
 		if (deferred.size() == 0) {

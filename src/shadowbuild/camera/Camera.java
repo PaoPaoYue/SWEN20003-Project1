@@ -2,9 +2,8 @@ package shadowbuild.camera;
 
 import org.newdawn.slick.Input;
 import shadowbuild.control.GameCoordinate;
-import shadowbuild.control.SpritesController;
 import shadowbuild.main.App;
-import shadowbuild.sprite.Sprite;
+import shadowbuild.sprite.Selectable;
 import shadowbuild.util.Rect;
 import shadowbuild.util.Vector2;
 
@@ -16,7 +15,7 @@ public class Camera {
     /** The scope of the game's view */
     private Rect scope;
     /** The target the camera should follow */
-    private Sprite followTarget;
+    private Selectable followTarget;
 
     public Camera() {
         scope = new Rect(0, 0, App.WINDOW_WIDTH, App.WINDOW_HEIGHT);
@@ -36,11 +35,11 @@ public class Camera {
         scope.setPos(pos);
     }
 
-    public Boolean isFollow() {
+    public boolean isFollow() {
         return followTarget != null;
     }
 
-    public void follow(Sprite followTarget) {
+    public void follow(Selectable followTarget) {
         this.followTarget = followTarget;
     }
 
@@ -54,30 +53,25 @@ public class Camera {
 
     public void init() {
         setPos(new Vector2(GameCoordinate.WORLD_MIDDLE_X, GameCoordinate.WORLD_MIDDLE_Y));
-        follow(SpritesController.getInstance().getMainPlayer());
     }
 
     public void update(Input input, int delta) {
-        if(App.DEBUG) {
-            if(input.isKeyDown(Input.KEY_D)) {
-                unFollow();
-                scope.move(Vector2.RIGHT, delta * 0.5);
-            }
-            if(input.isKeyDown(Input.KEY_A)) {
-                unFollow();
-                scope.move(Vector2.LEFT, delta * 0.5);
-            }
-            if(input.isKeyDown(Input.KEY_W)) {
-                unFollow();
-                scope.move(Vector2.UP, delta * 0.5);
-            }
-            if(input.isKeyDown(Input.KEY_S)) {
-                unFollow();
-                scope.move(Vector2.DOWN, delta * 0.5);
-            }
-            if (input.isKeyDown(Input.KEY_SPACE)) {
-                follow(SpritesController.getInstance().getMainPlayer());
-            }
+
+        if(input.isKeyDown(Input.KEY_D)) {
+            unFollow();
+            scope.move(Vector2.RIGHT, delta * 0.5);
+        }
+        if(input.isKeyDown(Input.KEY_A)) {
+            unFollow();
+            scope.move(Vector2.LEFT, delta * 0.5);
+        }
+        if(input.isKeyDown(Input.KEY_W)) {
+            unFollow();
+            scope.move(Vector2.UP, delta * 0.5);
+        }
+        if(input.isKeyDown(Input.KEY_S)) {
+            unFollow();
+            scope.move(Vector2.DOWN, delta * 0.5);
         }
         /** Move along with the followTarget */
         if (isFollow()){

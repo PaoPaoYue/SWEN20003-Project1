@@ -36,7 +36,7 @@ import org.newdawn.slick.util.ResourceLoader;
  * 
  * Classes can optionally implement setXMLElementName(String) and setXMLElementContent(String) to
  * recieve the name and content respectively of the XMLElement they were parsed from. This can 
- * help when mapping two elements to a single class.
+ * helper when mapping two elements to a single class.
  * 
  * To reiterate, I'm not sure this is a good idea yet. It helps me as a utility since I've done
  * this several times in the past but in the general case it may not be perfect. Consider a custom 
@@ -112,7 +112,7 @@ public class ObjectTreeParser {
 	}
 	
 	/**
-	 * Parse the XML document located by the slick resource loader using the
+	 * Parse the XML document located by the slick Resource loader using the
 	 * reference given.
 	 * 
 	 * @param ref The reference to the XML document
@@ -141,7 +141,7 @@ public class ObjectTreeParser {
 	}
 
 	/**
-	 * Parse the XML document located by the slick resource loader using the
+	 * Parse the XML document located by the slick Resource loader using the
 	 * reference given.
 	 * 
 	 * @param ref The reference to the XML document

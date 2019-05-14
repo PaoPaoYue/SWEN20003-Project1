@@ -16,7 +16,7 @@ import org.newdawn.slick.opengl.renderer.SGL;
 public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/** The stream to read the texture from */
 	private InputStream in;
-	/** The name of the resource to load */
+	/** The name of the Resource to load */
 	private String resourceName;
 	/** True if the image should be flipped */
 	private boolean flipped;
@@ -31,7 +31,7 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	 * Create a new deferred texture
 	 * 
 	 * @param in The input stream from which to read the texture
-	 * @param resourceName The name to give the resource
+	 * @param resourceName The name to give the Resource
  	 * @param flipped True if the image should be flipped
 	 * @param filter The filter to apply
 	 * @param trans The colour to defined as transparent
@@ -66,7 +66,7 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 				LoadingList.get().remove(this);
 				return;
 			} catch (IOException e) {
-				throw new RuntimeException("Attempt to use deferred texture before loading and resource not found: "+resourceName);
+				throw new RuntimeException("Attempt to use deferred texture before loading and Resource not found: "+resourceName);
 			}
 		}
 	}

@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * A simple wrapper around resource loading should anyone decide to change
+ * A simple wrapper around Resource loading should anyone decide to change
  * their minds how this is meant to work in the future.
  * 
  * @author Kevin Glass
@@ -48,10 +48,10 @@ public class ResourceLoader {
 	}
 	
 	/**
-	 * Get a resource
+	 * Get a Resource
 	 * 
-	 * @param ref The reference to the resource to retrieve
-	 * @return A stream from which the resource can be read
+	 * @param ref The reference to the Resource to retrieve
+	 * @return A stream from which the Resource can be read
 	 */
 	public static InputStream getResourceAsStream(String ref) {
 		InputStream in = null;
@@ -73,10 +73,10 @@ public class ResourceLoader {
 	}
 	
 	/**
-	 * Check if a resource is available from any given resource loader
+	 * Check if a Resource is available from any given Resource loader
 	 * 
-	 * @param ref A reference to the resource that should be checked
-	 * @return True if the resource can be located
+	 * @param ref A reference to the Resource that should be checked
+	 * @return True if the Resource can be located
 	 */
 	public static boolean resourceExists(String ref) {
 		URL url = null;
@@ -93,10 +93,10 @@ public class ResourceLoader {
 	}
 	
 	/**
-	 * Get a resource as a URL
+	 * Get a Resource as a URL
 	 * 
-	 * @param ref The reference to the resource to retrieve
-	 * @return A URL from which the resource can be read
+	 * @param ref The reference to the Resource to retrieve
+	 * @return A URL from which the Resource can be read
 	 */
 	public static URL getResource(String ref) {
 

@@ -65,7 +65,7 @@ interface AudioInputStream {
 	 * Close the stream
 	 * 
 	 * @see java.io.InputStream#close()
-	 * @throws IOException Indicates a failure to access the resource
+	 * @throws IOException Indicates a failure to access the Resource
 	 */
 	public void close() throws IOException;
 }

@@ -24,7 +24,7 @@ public interface GameState extends InputListener {
 	 * 
 	 * @param container The container holding the game
 	 * @param game The game holding this state
-	 * @throws SlickException Indicates a failure to initialise a resource for this state
+	 * @throws SlickException Indicates a failure to initialise a Resource for this state
 	 */
 	public void init(GameContainer container, StateBasedGame game) throws SlickException;
 	

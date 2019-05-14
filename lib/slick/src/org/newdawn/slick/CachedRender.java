@@ -26,7 +26,7 @@ public class CachedRender {
 	
 	/**
 	 * Create a new cached render that will build the specified 
-	 * operations on to a video card resource
+	 * operations on to a video card Resource
 	 * 
 	 * @param runnable The operations to cache
 	 */

@@ -24,9 +24,9 @@ public class App extends BasicGame {
     /** window height, in pixels */
     public static final int WINDOW_HEIGHT = 768;
     /** Developer mode */
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 
-    public GameController game;
+    private GameController game;
 
     public App() {
         super("Shadow Build");
@@ -35,8 +35,8 @@ public class App extends BasicGame {
     @Override
     public void init(GameContainer gc)
             throws SlickException {
-        game = new GameController();
-        game.init(gc);
+        game = GameController.getInstance();
+        game.init();
     }
 
     /** Update the game state for a frame.

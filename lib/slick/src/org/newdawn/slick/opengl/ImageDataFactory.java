@@ -51,7 +51,7 @@ public class ImageDataFactory {
 	 * Create an image data that is appropriate for the reference supplied
 	 * 
 	 * @param ref The reference to the image to retrieve
-	 * @return The image data that can be used to retrieve the data for that resource
+	 * @return The image data that can be used to retrieve the data for that Resource
 	 */
 	public static LoadableImageData getImageDataFor(String ref) {
 		LoadableImageData imageData;

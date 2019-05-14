@@ -27,12 +27,12 @@ public class BufferedImageUtil {
 	 * Load a texture
 	 * 
 	 * @param resourceName
-	 *            The location of the resource to load
+	 *            The location of the Resource to load
 	 * @param resourceImage
 	 *            The BufferedImage we are converting
 	 * @return The loaded texture
 	 * @throws IOException
-	 *             Indicates a failure to access the resource
+	 *             Indicates a failure to access the Resource
 	 */
 	public static Texture getTexture(String resourceName,
 			BufferedImage resourceImage) throws IOException {
@@ -49,12 +49,12 @@ public class BufferedImageUtil {
 	 * Load a texture
 	 * 
 	 * @param resourceName
-	 *            The location of the resource to load
+	 *            The location of the Resource to load
 	 * @param resourceImage
 	 *            The BufferedImage we are converting
 	 * @return The loaded texture
 	 * @throws IOException
-	 *             Indicates a failure to access the resource
+	 *             Indicates a failure to access the Resource
 	 */
 	public static Texture getTexture(String resourceName,
 			BufferedImage resourceImage, int filter) throws IOException {
@@ -71,7 +71,7 @@ public class BufferedImageUtil {
 	 * Load a texture into OpenGL from a BufferedImage
 	 * 
 	 * @param resourceName
-	 *            The location of the resource to load
+	 *            The location of the Resource to load
 	 * @param resourceimage
 	 *            The BufferedImage we are converting
 	 * @param target
@@ -84,7 +84,7 @@ public class BufferedImageUtil {
 	 *            The magnification filter
 	 * @return The loaded texture
 	 * @throws IOException
-	 *             Indicates a failure to access the resource
+	 *             Indicates a failure to access the Resource
 	 */
 	public static Texture getTexture(String resourceName,
 			BufferedImage resourceimage, int target, int dstPixelFormat,

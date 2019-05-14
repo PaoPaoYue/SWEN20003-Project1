@@ -72,7 +72,7 @@ public class BigImage extends Image {
 	 * Create a new big image by loading it from the specified reference
 	 * 
 	 * @param ref The reference to the image to load
-	 * @throws SlickException Indicates we were unable to locate the resource
+	 * @throws SlickException Indicates we were unable to locate the Resource
 	 */
 	public BigImage(String ref) throws SlickException {
 		this(ref, Image.FILTER_NEAREST);
@@ -83,7 +83,7 @@ public class BigImage extends Image {
 	 * 
 	 * @param ref The reference to the image to load
 	 * @param filter The image filter to apply (@see #Image.FILTER_NEAREST)
-	 * @throws SlickException Indicates we were unable to locate the resource
+	 * @throws SlickException Indicates we were unable to locate the Resource
 	 */
 	public BigImage(String ref,int filter) throws SlickException {
 		
@@ -96,7 +96,7 @@ public class BigImage extends Image {
 	 * @param ref The reference to the image to load
 	 * @param filter The image filter to apply (@see #Image.FILTER_NEAREST)
 	 * @param tileSize The maximum size of the tiles to use to build the bigger image
-	 * @throws SlickException Indicates we were unable to locate the resource
+	 * @throws SlickException Indicates we were unable to locate the Resource
 	 */
 	public BigImage(String ref, int filter, int tileSize) throws SlickException {
 		build(ref, filter, tileSize);
@@ -142,7 +142,7 @@ public class BigImage extends Image {
 	 * @param ref The reference to the image to load
 	 * @param filter The image filter to apply (@see #Image.FILTER_NEAREST)
 	 * @param tileSize The maximum size of the tiles to use to build the bigger image
-	 * @throws SlickException Indicates we were unable to locate the resource
+	 * @throws SlickException Indicates we were unable to locate the Resource
 	 */
 	private void build(String ref, int filter, int tileSize) throws SlickException {
 		try {

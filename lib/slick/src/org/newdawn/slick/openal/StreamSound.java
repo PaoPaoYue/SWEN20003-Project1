@@ -8,7 +8,7 @@ import org.lwjgl.openal.AL10;
 import org.newdawn.slick.util.Log;
 
 /**
- * A sound implementation wrapped round a player which reads (and potentially) rereads
+ * A sound implementation wrapped round a units which reads (and potentially) rereads
  * a stream. This supplies streaming audio
  *
  * @author kevin
@@ -16,13 +16,13 @@ import org.newdawn.slick.util.Log;
  * @author Rockstar playAsMusic cleanup 
  */
 public class StreamSound extends AudioImpl {
-	/** The player we're going to ask to stream data */
+	/** The units we're going to ask to stream data */
 	private OpenALStreamPlayer player;
 	
 	/**
 	 * Create a new sound wrapped round a stream
 	 * 
-	 * @param player The stream player we'll use to access the stream
+	 * @param player The stream units we'll use to access the stream
 	 */
 	public StreamSound(OpenALStreamPlayer player) {
 		this.player = player;

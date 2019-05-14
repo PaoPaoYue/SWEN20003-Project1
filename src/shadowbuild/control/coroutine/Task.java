@@ -19,13 +19,13 @@ public class Task {
         active = false;
     }
 
-    public boolean expired() {
+    public boolean isExpired() {
         return !active;
     }
 
     public void run(Sprite sprite, int delta) {
         if (executor != null)
-            executor.run(sprite, this, delta);
+            executor.run(this, delta);
         else
             stop();
     }

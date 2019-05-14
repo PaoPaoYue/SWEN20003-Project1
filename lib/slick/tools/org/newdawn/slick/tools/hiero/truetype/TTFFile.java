@@ -1250,7 +1250,7 @@ public class TTFFile {
         // Approximate capHeight from height of "H"
         // It's most unlikely that a font misses the PCLT table
         // This also assumes that postscriptnames exists ("H")
-        // Should look it up int the cmap (that wouldn't help
+        // Should look it up int the cmap (that wouldn't helper
         // for charsets without H anyway...)
         // Same for xHeight with the letter "x"
         int localCapHeight = 0;

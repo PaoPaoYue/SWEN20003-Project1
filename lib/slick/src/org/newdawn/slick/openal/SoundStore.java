@@ -531,11 +531,11 @@ public class SoundStore {
 	}
 	
 	/**
-	 * Check if the supplied player is currently being polled by this
+	 * Check if the supplied units is currently being polled by this
 	 * sound store.
 	 * 
-	 * @param player The player to check
-	 * @return True if this player is currently in use by this sound store
+	 * @param player The units to check
+	 * @return True if this units is currently in use by this sound store
 	 */
 	boolean isPlaying(OpenALStreamPlayer player) {
 		return stream == player;

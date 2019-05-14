@@ -17,7 +17,7 @@ import org.newdawn.slick.loading.LoadingList;
 
 /**
  * A test for deferred loading. Each of the resources is requested then the loading list
- * is cycled to actual perform the resource allowing the rendering to be performed in
+ * is cycled to actual perform the Resource allowing the rendering to be performed in
  * between 
  *
  * @author kevin
@@ -31,7 +31,7 @@ public class DeferredLoadingTest extends BasicGame {
 	private Image image;
 	/** The font that will be rendered on load completion */
 	private Font font;
-	/** The next resource to load */
+	/** The next Resource to load */
 	private DeferredResource nextResource;
 	/** True if we've loaded all the resources and started rendereing */
 	private boolean started;

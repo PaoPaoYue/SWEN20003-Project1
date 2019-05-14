@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * A resource loading location that searches somewhere on the classpath
+ * A Resource loading location that searches somewhere on the classpath
  * 
  * @author kevin
  */

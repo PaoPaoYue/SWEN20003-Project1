@@ -215,7 +215,7 @@ public class Image implements Renderable {
 	 * 
 	 * @param width The width of the image
 	 * @param height The height of the image
-	 * @throws SlickException Indicates a failure to create the underlying resource
+	 * @throws SlickException Indicates a failure to create the underlying Resource
 	 */
 	public Image(int width, int height) throws SlickException {
 		this(width, height, FILTER_NEAREST);
@@ -227,7 +227,7 @@ public class Image implements Renderable {
 	 * @param width The width of the image
 	 * @param height The height of the image
 	 * @param f The filter to apply to scaling the new image
-	 * @throws SlickException Indicates a failure to create the underlying resource
+	 * @throws SlickException Indicates a failure to create the underlying Resource
 	 */
 	public Image(int width, int height, int f) throws SlickException {
 		ref = super.toString();
@@ -324,10 +324,10 @@ public class Image implements Renderable {
 	}
 	
 	/** 
-	 * Get the reference to the resource this image was loaded from, if any. Note that
+	 * Get the reference to the Resource this image was loaded from, if any. Note that
 	 * this can be null in the cases where an image was programatically generated.
 	 * 
-	 * @return The reference to the resource the reference was loaded from
+	 * @return The reference to the Resource the reference was loaded from
 	 */
 	public String getResourceReference() {
 		return ref;

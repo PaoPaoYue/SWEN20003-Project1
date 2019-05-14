@@ -28,7 +28,7 @@ public interface ParticleEmitter {
 	
 	/**
 	 * Wrap up the particle emitter. This means the emitter will no longer produce
-	 * particles and will be marked as completed once the particles have expired
+	 * particles and will be marked as completed once the particles have isExpired
 	 */
 	public void wrapUp();
 	

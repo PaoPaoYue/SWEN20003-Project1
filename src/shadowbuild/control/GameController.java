@@ -1,10 +1,10 @@
 package shadowbuild.control;
 
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 import shadowbuild.camera.Camera;
+import shadowbuild.gui.GUI;
+import shadowbuild.player.Player;
 import shadowbuild.terrain.Terrain;
 
 /**
@@ -14,45 +14,54 @@ public class GameController {
 
     private Terrain mainTerrain;
     private Camera mainCamera;
+    private Player mainPlayer;
+    private GUI gameUI;
     private SpritesController spritesController;
 
     /** Singleton pattern */
-    private static GameController _instance;
+    private static GameController instance;
 
     public static GameController getInstance(){
-        return _instance;
+        if (instance == null) {
+            instance = new GameController();
+        }
+        return instance;
     }
 
-    public GameController() throws SlickException {
+    private GameController() {
         mainTerrain = new Terrain();
         mainCamera = new Camera();
-        spritesController = new SpritesController();
-        _instance = this;
+        mainPlayer = new Player("mainPlayer");
+        gameUI = new GUI();
+        spritesController = SpritesController.getInstance();
     }
 
-    public Terrain getMainTerrain() {
-        return mainTerrain;
+    public static Terrain getMainTerrain() {
+        return getInstance().mainTerrain;
     }
 
-    public Camera getMainCamera() {
-        return mainCamera;
+    public static Camera getMainCamera() {
+        return getInstance().mainCamera;
     }
 
-    public void init(GameContainer gc) throws SlickException {
-        GameCoordinate.reset();
+    public static Player getMainPlayer() {
+        return getInstance().mainPlayer;
+    }
+
+    public void init(){
         spritesController.init();
         mainCamera.init();
+        mainPlayer.getInfo().changeMetalAmount(1000);
     }
 
-    public void update(Input input, int delta) throws SlickException {
+    public void update(Input input, int delta){
         spritesController.update(input, delta);
         mainCamera.update(input, delta);
     }
 
-    public void render(Graphics g) throws SlickException {
+    public void render(Graphics g){
         mainTerrain.render(mainCamera);
         spritesController.render(mainCamera);
-
+        gameUI.render(g);
     }
-
 }

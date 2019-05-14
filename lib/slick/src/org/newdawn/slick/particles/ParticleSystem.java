@@ -561,7 +561,7 @@ public class ParticleSystem {
 	}
 	
 	/**
-	 * Release a particle back to the system once it has expired
+	 * Release a particle back to the system once it has isExpired
 	 * 
 	 * @param particle The particle to be released
 	 */

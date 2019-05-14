@@ -157,7 +157,7 @@ public class InternalTextureLoader {
     }
 
     /**
-     * Get a texture from a resource location
+     * Get a texture from a Resource location
      * 
      * @param resourceName The location to load the texture from
      * @param flipped True if we should flip the texture on the y axis while loading
@@ -172,7 +172,7 @@ public class InternalTextureLoader {
     }
     
     /**
-     * Get a texture from a resource location
+     * Get a texture from a Resource location
      * 
      * @param resourceName The location to load the texture from
      * @param flipped True if we should flip the texture on the y axis while loading

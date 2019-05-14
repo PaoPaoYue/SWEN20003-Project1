@@ -54,7 +54,7 @@ public class Vector2 {
     }
 
     /** Calculate the distance from this position to another */
-    public Double distance(Vector2 v) {
+    public double distance(Vector2 v) {
         Vector2 subV = subtract(v);
         return Math.sqrt(subV.x * subV.x + subV.y * subV.y);
     }

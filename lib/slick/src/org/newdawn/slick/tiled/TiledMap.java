@@ -152,7 +152,7 @@ public class TiledMap {
 	/**
 	 * Get the location of the tile images specified
 	 * 
-	 * @return The location of the tile images specified as a resource reference
+	 * @return The location of the tile images specified as a Resource reference
 	 *         prefix
 	 */
 	public String getTilesLocation() {

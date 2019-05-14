@@ -1,8 +1,8 @@
 package shadowbuild.terrain;
 
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import shadowbuild.camera.Camera;
+import shadowbuild.helper.ResourceLoader;
 import shadowbuild.util.Rect;
 import shadowbuild.util.Vector2;
 
@@ -11,7 +11,7 @@ import shadowbuild.util.Vector2;
  */
 public class Terrain {
 
-    private static String MAP_PATH = "assets/main.tmx";
+    private final static String MAP_PATH = "assets/main.tmx";
 
     private TiledMap mainMap;
     /** width measured in pixels */
@@ -20,14 +20,10 @@ public class Terrain {
     private int height;
 
 
-    public Terrain() throws SlickException {
-        mainMap = new TiledMap(MAP_PATH);
+    public Terrain() {
+        mainMap = ResourceLoader.readTiledMap(MAP_PATH);
         width = mainMap.getWidth() * mainMap.getTileWidth();
         height = mainMap.getHeight() * mainMap.getTileHeight();
-    }
-
-    public TiledMap getMainMap() {
-        return mainMap;
     }
 
     public int getWidth() {
