@@ -38,13 +38,13 @@ public class CommandCentre extends Building implements Constructable {
     public void update(Input input, int delta) {
         if(isSelected() && !isConstructing()) {
             if(input.isKeyPressed(Input.KEY_1)) {
-                construct(0,getPos());
+                construct(0,getPos(), false);
             }
             else if(input.isKeyPressed(Input.KEY_2)) {
-                construct(1,getPos());
+                construct(1,getPos(), false);
             }
             else if(input.isKeyPressed(Input.KEY_3)) {
-                construct(2,getPos());
+                construct(2,getPos(), false);
             }
         }
     }

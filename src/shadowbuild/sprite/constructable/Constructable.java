@@ -15,7 +15,7 @@ public interface Constructable {
     }
 
 
-    default void construct(int optionIndex, Vector2 pos){
+    default void construct(int optionIndex, Vector2 pos, boolean destroySelf){
         ConstructMenuItem constructTarget = getConstructMenu().getConstructMenuItem(optionIndex);
         if (constructTarget != null) {
             PlayerInfo playerInfo = GameController.getMainPlayer().getInfo();
@@ -34,6 +34,7 @@ public interface Constructable {
                         e.printStackTrace();
                     }
                     getConstructMenu().setConstructTarget(null);
+                    if(destroySelf) ((Sprite)this).destroySelf();
                     task.stop();
                 });
             }

@@ -43,7 +43,7 @@ public class Builder extends Unit implements Constructable {
                 moveTowards(destination);
             }
             if(input.isKeyPressed(Input.KEY_1)) {
-                construct(0,getPos());
+                construct(0,getPos(), false);
             }
         }
     }
