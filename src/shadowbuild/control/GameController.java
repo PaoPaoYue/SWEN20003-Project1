@@ -18,7 +18,6 @@ import java.util.Map;
  */
 public class GameController {
 
-    private static boolean isServer;
 
     private Terrain mainTerrain;
     private Camera mainCamera;
@@ -43,7 +42,6 @@ public class GameController {
     }
 
     public static void setClient() {
-        isServer = false;
 
         ClientController clientController = ClientController.getInstance();
         getInstance().mainPlayer = clientController.mainPlayer;
@@ -60,7 +58,6 @@ public class GameController {
     }
 
     public static void setServer() {
-        isServer = true;
 
         ServerController serverController = ServerController.getInstance();
         getInstance().mainPlayer = serverController.mainPlayer;
@@ -76,9 +73,6 @@ public class GameController {
         getInstance().mainCamera.init();
     }
 
-    public static boolean isServer() {
-        return isServer;
-    }
 
     public static Player getMainPlayer() {
         return getInstance().mainPlayer;
@@ -109,6 +103,9 @@ public class GameController {
 
     public void update(Input input, int delta){
         mainInput.update(input,delta);
+        for (NetworkInputController otherInput: othersInputs.values()){
+            otherInput.update(delta);
+        }
         mainCamera.update(input, delta);
         spritesController.update(mainInput, othersInputs, delta);
     }

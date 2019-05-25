@@ -128,7 +128,7 @@ public class Engineer extends Unit{
     private CommandCentre findNearestCentre() {
         CommandCentre centre = null;
         double minDistance = Double.MAX_VALUE;
-        for (Sprite sprite: SpritesController.getSprites("CommandCentre")) {
+        for (Sprite sprite: SpritesController.getSprites("CommandCentre", this.getPlayer())) {
             Double distance = getPos().distance(sprite.getPos());
             if(distance < minDistance) {
                 minDistance = distance;

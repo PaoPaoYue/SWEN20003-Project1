@@ -29,7 +29,7 @@ public interface Constructable {
                     try {
                         Sprite newSprite = constructTarget.getInstance();
                         newSprite.setPos(pos);
-                        SpritesController.addSprite(newSprite);
+                        SpritesController.addSprite(newSprite, ((Sprite)this).getPlayer());
                     } catch (IllegalAccessException | InstantiationException e) {
                         e.printStackTrace();
                     }

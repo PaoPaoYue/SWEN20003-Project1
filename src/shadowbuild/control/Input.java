@@ -12,18 +12,18 @@ public class Input {
 
     private int timeStamp;
     private byte[] keys;
-    private boolean isMouseLeftPressed;
-    private boolean isMouseRightPressed;
+    private boolean MouseLeftPressed;
+    private boolean MouseRightPressed;
     private double mousePosX;
     private double mousePosY;
 
-    public Input(int timeStamp, byte[] keys, boolean isMouseLeftPressed, boolean isMouseRightPressed, double mousePosX, double mousePosY) {
+    public Input(int timeStamp, byte[] keys, boolean MouseLeftPressed, boolean MouseRightPressed, double mousePosX, double mousePosY) {
         this.timeStamp = timeStamp;
         this.keys = keys;
         this.mousePosX = mousePosX;
         this.mousePosY = mousePosY;
-        this.isMouseLeftPressed = isMouseLeftPressed;
-        this.isMouseRightPressed = isMouseRightPressed;
+        this.MouseLeftPressed = MouseLeftPressed;
+        this.MouseRightPressed = MouseRightPressed;
     }
 
 
@@ -39,12 +39,13 @@ public class Input {
         return keys[i] != 0;
     }
 
+
     public boolean isMouseLeftPressed() {
-        return isMouseLeftPressed;
+        return MouseLeftPressed;
     }
 
     public boolean isMouseRightPressed() {
-        return isMouseRightPressed;
+        return MouseRightPressed;
     }
 
     public double getMousePosX() {

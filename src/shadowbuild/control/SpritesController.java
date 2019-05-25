@@ -120,10 +120,11 @@ public class SpritesController {
         addSprites();
         updateSelect(mainInput.getInput());
         updateTasks(delta);
-        updateSprites(mainInput.getInput(), delta);
+        updateNonPlayerSprites(delta);
+        updateSprites(GameController.getMainPlayer(), mainInput.getInput(), delta);
         for (Map.Entry<Player, NetworkInputController> entry: othersInputs.entrySet()) {
             updateOthersSelect(entry.getKey(), entry.getValue().getInput());
-            updateSprites(entry.getValue().getInput(), delta);
+            updateSprites(entry.getKey(), entry.getValue().getInput(), delta);
         }
     }
 
@@ -225,11 +226,22 @@ public class SpritesController {
         }
     }
 
+    private void updateNonPlayerSprites(int delta) {
+        for (HashSet<Sprite> set : sprites.values()) {
+            for (Sprite sprite: set) {
+                if (sprite.getPlayer() == null)
+                    sprite.update(Input.NO_INPUT, delta);
+            }
+        }
+    }
 
-    private void updateSprites(Input input, int delta) {
+
+
+    private void updateSprites(Player player, Input input, int delta) {
         /** update all sprites */
         for (HashSet<Sprite> set : sprites.values()) {
             for (Sprite sprite: set) {
+                if (sprite.getPlayer() != null && sprite.getPlayer().equals(player))
                 sprite.update(input, delta);
             }
         }

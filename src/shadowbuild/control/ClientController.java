@@ -1,8 +1,11 @@
 package shadowbuild.control;
 
+import com.alibaba.fastjson.JSON;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+import shadowbuild.helper.Logger;
 import shadowbuild.main.App;
+import shadowbuild.main.ConnectState;
 import shadowbuild.network.Client;
 import shadowbuild.network.message.*;
 import shadowbuild.player.Player;
@@ -15,8 +18,11 @@ import java.util.Map;
 public class ClientController {
 
     public enum ConnectState {
-        NO_CONNECTION, CONNECT_FAILED, CONNECTING, CONNECT_INTERRUPTED
+        NO_CONNECTION, CONNECT_FAILED, CONNECTING, CONNECT_INTERRUPTED;
     }
+
+    private static final int POST_INTERVAL = 100;
+
     Player mainPlayer;
     List<Player> otherPlayers;
     InputController mainInput;
@@ -24,6 +30,8 @@ public class ClientController {
 
     private ConnectState connectState;
     private Client client;
+    private boolean onGame;
+    private Thread postGameThread;
 
     /** Singleton pattern */
     private static ClientController instance;
@@ -39,6 +47,15 @@ public class ClientController {
         connectState = ConnectState.NO_CONNECTION;
         otherPlayers = new ArrayList<>();
         othersInputs = new HashMap<>();
+
+        postGameThread = new Thread(() -> {
+            while (onGame) {
+                try {
+                    Thread.sleep(POST_INTERVAL);
+                } catch (InterruptedException e) {}
+                client.send(new PostGameMessage(mainPlayer.getId(), mainInput.getInputQueue()),null);
+            }
+        });
     }
 
     public ConnectState getConnectState() {
@@ -87,6 +104,8 @@ public class ClientController {
 
     public void CloseClient() {
         connectState = ConnectState.NO_CONNECTION;
+        onGame = true;
+        if (postGameThread.isAlive()) postGameThread.interrupt();
         client.close();
     }
 
@@ -123,8 +142,9 @@ public class ClientController {
     }
 
     public void onReceiveStart(StartMessage message) {
-        GameController.setClient();
-        App.game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+        onGame = true;
+        postGameThread.start();
+        shadowbuild.main.ConnectState.startPlay(false);
     }
 
     public void onReceivePublishPlayer(PublishPlayersMessage message) {
