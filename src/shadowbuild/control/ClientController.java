@@ -1,11 +1,5 @@
 package shadowbuild.control;
 
-import com.alibaba.fastjson.JSON;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
-import shadowbuild.helper.Logger;
-import shadowbuild.main.App;
-import shadowbuild.main.ConnectState;
 import shadowbuild.network.Client;
 import shadowbuild.network.message.*;
 import shadowbuild.player.Player;
@@ -109,6 +103,10 @@ public class ClientController {
         client.close();
     }
 
+    public void sendText(String text) {
+        client.send(new TextMessage(mainPlayer.getId(), text), null);
+    }
+
     public void onConnectionFailed() {
         connectState = ConnectState.CONNECT_FAILED;
     }
@@ -138,7 +136,10 @@ public class ClientController {
     }
 
     public void onReceiveText(TextMessage message) {
-
+        for (Player player: otherPlayers) {
+            if (player.getId() == message.getId())
+                GameController.getGameUI().getTextbox().addMessage("["+ player.getPlayerName() + "]: " + message.getText());
+        }
     }
 
     public void onReceiveStart(StartMessage message) {

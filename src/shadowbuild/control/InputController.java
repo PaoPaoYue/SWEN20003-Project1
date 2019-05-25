@@ -1,6 +1,7 @@
 package shadowbuild.control;
 
 import com.alibaba.fastjson.JSON;
+import org.lwjgl.Sys;
 import shadowbuild.helper.Logger;
 import shadowbuild.util.Vector2;
 
@@ -23,7 +24,7 @@ public class InputController {
 
 
     public void update(org.newdawn.slick.Input input, int delta) {
-        if (canUpdate(input)) {
+        if (canUpdate()) {
             boolean flag = false;
             byte[] keys = new byte[3];
             boolean isMouseLeftPressed = false;
@@ -73,8 +74,8 @@ public class InputController {
         return res;
     }
 
-    private boolean canUpdate(org.newdawn.slick.Input input){
-        return true;
+    private boolean canUpdate(){
+        return !GameController.getGameUI().getTextbox().isAcceptingInput();
     }
 
 }

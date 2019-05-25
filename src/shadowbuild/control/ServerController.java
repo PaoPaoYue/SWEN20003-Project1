@@ -148,6 +148,10 @@ public class ServerController {
         ConnectState.startPlay(true);
     }
 
+    public void sendText(String text) {
+        server.publish(new TextMessage(mainPlayer.getId(), text), null);
+    }
+
     public void onReceiveConnect(ConnectMessage message, int id) {
         Player newPlayer = new Player(message.getUsername());
         newPlayer.setId(id);
@@ -179,6 +183,10 @@ public class ServerController {
 
     public void onReceiveText(TextMessage message) {
         server.publish(message, null);
+        for (Player player: otherPlayers) {
+            if (player.getId() == message.getId())
+                GameController.getGameUI().getTextbox().addMessage("["+ player.getPlayerName() + "]: " + message.getText());
+        }
     }
 
     public void onReceivePostGame(PostGameMessage message) {

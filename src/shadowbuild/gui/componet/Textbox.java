@@ -3,6 +3,9 @@ package shadowbuild.gui.componet;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.gui.TextField;
+import shadowbuild.control.ClientController;
+import shadowbuild.control.GameController;
+import shadowbuild.control.ServerController;
 import shadowbuild.gui.GUI;
 import shadowbuild.main.App;
 import shadowbuild.util.Rect;
@@ -31,7 +34,13 @@ public class Textbox {
 
         inputField = new TextField(App.container, App.container.getDefaultFont(),x, y, MARGIN_HORIZONTAL*2+len* GUI.CHAR_WIDTH, GUI.LINE_HEIGHT);
         inputField.addListener((inputField) -> {
-            addMessage(((TextField) inputField).getText());
+            String text = ((TextField) inputField).getText();
+            addMessage("[" + GameController.getMainPlayer().getPlayerName() + "]: " + text);
+            if (GameController.isServer()) {
+                ServerController.getInstance().sendText(text);
+            } else {
+                ClientController.getInstance().sendText(text);
+            }
             ((TextField) inputField).setText("");
         });
 
@@ -74,7 +83,7 @@ public class Textbox {
     }
 
     public Boolean isAcceptingInput() {
-        return inputField.isAcceptingInput();
+        return inputField.hasFocus();
     }
 
 

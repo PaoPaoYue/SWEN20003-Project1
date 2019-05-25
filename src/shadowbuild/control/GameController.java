@@ -18,10 +18,11 @@ import java.util.Map;
  */
 public class GameController {
 
+    private static boolean isServer;
 
     private Terrain mainTerrain;
     private Camera mainCamera;
-    private GUI gameUI;
+    private GameUI gameUI;
     private Player mainPlayer;
     private List<Player> otherPlayers;
     private InputController mainInput;
@@ -42,6 +43,7 @@ public class GameController {
     }
 
     public static void setClient() {
+        isServer = false;
 
         ClientController clientController = ClientController.getInstance();
         getInstance().mainPlayer = clientController.mainPlayer;
@@ -58,6 +60,7 @@ public class GameController {
     }
 
     public static void setServer() {
+        isServer = true;
 
         ServerController serverController = ServerController.getInstance();
         getInstance().mainPlayer = serverController.mainPlayer;
@@ -71,6 +74,10 @@ public class GameController {
 
         getInstance().spritesController.init();
         getInstance().mainCamera.init();
+    }
+
+    public static boolean isServer() {
+        return isServer;
     }
 
 
@@ -96,6 +103,8 @@ public class GameController {
     public static Camera getMainCamera() {
         return getInstance().mainCamera;
     }
+
+    public static GameUI getGameUI() {return getInstance().gameUI;}
 
     public void init(){
 

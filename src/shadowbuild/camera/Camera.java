@@ -1,6 +1,7 @@
 package shadowbuild.camera;
 
 import org.newdawn.slick.Input;
+import shadowbuild.control.GameController;
 import shadowbuild.control.GameCoordinate;
 import shadowbuild.main.App;
 import shadowbuild.sprite.Selectable;
@@ -56,23 +57,25 @@ public class Camera {
     }
 
     public void update(Input input, int delta) {
+        if (canAcceptInput()) {
+            if(input.isKeyDown(Input.KEY_D)) {
+                unFollow();
+                scope.move(Vector2.RIGHT, delta * 0.5);
+            }
+            if(input.isKeyDown(Input.KEY_A)) {
+                unFollow();
+                scope.move(Vector2.LEFT, delta * 0.5);
+            }
+            if(input.isKeyDown(Input.KEY_W)) {
+                unFollow();
+                scope.move(Vector2.UP, delta * 0.5);
+            }
+            if(input.isKeyDown(Input.KEY_S)) {
+                unFollow();
+                scope.move(Vector2.DOWN, delta * 0.5);
+            }
+        }
 
-        if(input.isKeyDown(Input.KEY_D)) {
-            unFollow();
-            scope.move(Vector2.RIGHT, delta * 0.5);
-        }
-        if(input.isKeyDown(Input.KEY_A)) {
-            unFollow();
-            scope.move(Vector2.LEFT, delta * 0.5);
-        }
-        if(input.isKeyDown(Input.KEY_W)) {
-            unFollow();
-            scope.move(Vector2.UP, delta * 0.5);
-        }
-        if(input.isKeyDown(Input.KEY_S)) {
-            unFollow();
-            scope.move(Vector2.DOWN, delta * 0.5);
-        }
         /** Move along with the followTarget */
         if (isFollow()){
             setPos(followTarget.getPos());
@@ -94,6 +97,10 @@ public class Camera {
         /** Stop when reach the bottom */
         else if(scope.getMaxY() > GameCoordinate.WORLD_HEIGHT)
             scope.setMaxY(GameCoordinate.WORLD_HEIGHT);
+    }
+
+    private boolean canAcceptInput(){
+        return !GameController.getGameUI().getTextbox().isAcceptingInput();
     }
 }
 
