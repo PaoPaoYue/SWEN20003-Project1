@@ -51,6 +51,8 @@ public class ClientController {
 
     public void setMainPlayer(Player mainPlayer) {
         this.mainPlayer = mainPlayer;
+        mainPlayer.getGameInfo().changeMetalAmount(1000);
+        this.mainInput = new InputController();
     }
 
     public List<Player> getAllPlayers() {
@@ -66,6 +68,8 @@ public class ClientController {
 
     public void addPlayer(Player player) {
         otherPlayers.add(player);
+        player.getGameInfo().changeMetalAmount(1000);
+        othersInputs.put(player, new NetworkInputController());
     }
 
     public void deletePlayer(int id) {
