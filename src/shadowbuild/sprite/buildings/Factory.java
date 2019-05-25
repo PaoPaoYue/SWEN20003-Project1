@@ -1,6 +1,6 @@
 package shadowbuild.sprite.buildings;
 
-import org.newdawn.slick.Input;
+import shadowbuild.control.Input;
 import shadowbuild.helper.ResourceLoader;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;

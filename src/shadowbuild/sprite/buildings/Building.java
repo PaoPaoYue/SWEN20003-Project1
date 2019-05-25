@@ -1,7 +1,6 @@
 package shadowbuild.sprite.buildings;
 
 import org.newdawn.slick.Image;
-import shadowbuild.control.GameController;
 import shadowbuild.control.SpritesController;
 import shadowbuild.sprite.RectSprite;
 import shadowbuild.sprite.Selectable;
@@ -36,21 +35,12 @@ public abstract class Building extends RectSprite implements Selectable {
     public void select() {
         if (!selected) {
             selected = true;
-            if (SpritesController.getSelectedSprite() != null)
-                SpritesController.getSelectedSprite().unselect();
-            SpritesController.setSelectedSprite(this);
-            GameController.getMainCamera().follow(this);
-            SpritesController.addSprite(new BuildingHighlight(this));
         }
     }
 
     @Override
     public void unselect() {
-        if (selected){
-            selected = false;
-            SpritesController.setSelectedSprite(null);
-            GameController.getMainCamera().unFollow();
-        }
+        selected = false;
     }
 
     @Override

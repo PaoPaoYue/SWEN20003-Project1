@@ -1,10 +1,5 @@
 package shadowbuild.sprite;
 
-import shadowbuild.sprite.buildings.*;
-import shadowbuild.sprite.effects.*;
-import shadowbuild.sprite.resources.*;
-import shadowbuild.sprite.units.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -53,7 +48,6 @@ public class SpritesParser {
     private static Class[] getClasses(String packageName)
             throws ClassNotFoundException, IOException, URISyntaxException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        assert classLoader != null;
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
         List<File> dirs = new ArrayList<File>();
@@ -65,7 +59,7 @@ public class SpritesParser {
         for (File directory : dirs) {
             classes.addAll(findClasses(directory, packageName));
         }
-        return classes.toArray(new Class[classes.size()]);
+        return classes.toArray(new Class[0]);
     }
 
     /**

@@ -1,6 +1,6 @@
 package shadowbuild.sprite.buildings;
 
-import org.newdawn.slick.Input;
+import shadowbuild.control.Input;
 import shadowbuild.helper.ResourceLoader;
 import shadowbuild.sprite.Triggerable;
 import shadowbuild.sprite.units.Engineer;

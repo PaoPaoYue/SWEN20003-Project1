@@ -2,7 +2,7 @@ package shadowbuild.sprite.constructable;
 
 import shadowbuild.control.GameController;
 import shadowbuild.control.SpritesController;
-import shadowbuild.player.PlayerInfo;
+import shadowbuild.player.PlayerGameInfo;
 import shadowbuild.sprite.Sprite;
 import shadowbuild.util.Vector2;
 
@@ -18,7 +18,7 @@ public interface Constructable {
     default void construct(int optionIndex, Vector2 pos, boolean destroySelf){
         ConstructMenuItem constructTarget = getConstructMenu().getConstructMenuItem(optionIndex);
         if (constructTarget != null) {
-            PlayerInfo playerInfo = GameController.getMainPlayer().getInfo();
+            PlayerGameInfo playerInfo = GameController.getMainPlayer().getGameInfo();
             if(playerInfo.changeMetalAmount(constructTarget.getMetalCost()) &&
                     playerInfo.changeUnobtainiumAmount(constructTarget.getUnobtainiumCost())){
                 getConstructMenu().setConstructTarget(constructTarget);

@@ -1,7 +1,6 @@
 package shadowbuild.sprite.units;
 
-import org.newdawn.slick.Input;
-import shadowbuild.control.GameCoordinate;
+import shadowbuild.control.Input;
 import shadowbuild.helper.ResourceLoader;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
@@ -35,9 +34,9 @@ public class Truck extends Unit implements Constructable {
     @Override
     public void update(Input input, int delta) {
         if(isSelected() && !isConstructing()) {
-            if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+            if (input.isMouseRightPressed()) {
                 /** Get the mouse input and convert to position in the world coordinate system */
-                Vector2 destination = GameCoordinate.screenToWorld(new Vector2(input.getMouseX(), input.getMouseY()));
+                Vector2 destination = input.mousePos();
                 /** Set a coroutine movement task */
                 moveTowards(destination);
             }

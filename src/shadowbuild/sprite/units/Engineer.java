@@ -1,8 +1,7 @@
 package shadowbuild.sprite.units;
 
-import org.newdawn.slick.Input;
 import shadowbuild.control.GameController;
-import shadowbuild.control.GameCoordinate;
+import shadowbuild.control.Input;
 import shadowbuild.control.SpritesController;
 import shadowbuild.helper.ResourceLoader;
 import shadowbuild.sprite.Sprite;
@@ -46,9 +45,9 @@ public class Engineer extends Unit{
     @Override
     public void update(Input input, int delta) {
         if(isSelected()) {
-            if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+            if (input.isMouseRightPressed()) {
                 /** Get the mouse input and convert to position in the world coordinate system */
-                Vector2 destination = GameCoordinate.screenToWorld(new Vector2(input.getMouseX(), input.getMouseY()));
+                Vector2 destination = input.mousePos();
                 Resource resource = detectResource(destination);
                 if(resource != null) {
                     mineTarget = resource;
@@ -97,9 +96,9 @@ public class Engineer extends Unit{
         addTask((task, delta) -> {
             if(getPos().equals(destination)) {
                 if (mineTarget instanceof Metal)
-                    GameController.getMainPlayer().getInfo().changeMetalAmount(load);
+                    getPlayer().getGameInfo().changeMetalAmount(load);
                 else
-                    GameController.getMainPlayer().getInfo().changeUnobtainiumAmount(load);
+                    getPlayer().getGameInfo().changeUnobtainiumAmount(load);
                 load = 0;
                 if(mineTarget == null || mineTarget.isEmpty()) {
                     this.mineTarget = null;

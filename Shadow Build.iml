@@ -8,5 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="slick" level="project" />
+    <orderEntry type="library" name="dragonite-sdk-0.3.4" level="project" />
+    <orderEntry type="library" name="fastjson-1.2.58" level="project" />
   </component>
 </module>

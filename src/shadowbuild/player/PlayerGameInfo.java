@@ -1,6 +1,6 @@
 package shadowbuild.player;
 
-public class PlayerInfo {
+public class PlayerGameInfo {
 
     private int metalAmount;
     private int unobtainiumAmount;

@@ -1,4 +1,3 @@
-command_centre,812,748
 metal_mine,1088,704
 metal_mine,1024,704
 metal_mine,1088,640
@@ -14,4 +13,15 @@ unobtainium_mine,1568,800
 pylon,1632,288
 pylon,224,1184
 pylon,224,160
+0
+command_centre,812,748
 engineer,812,812
+1
+command_centre,912,748
+engineer,912,812
+2
+command_centre,712,748
+engineer,712,812
+3
+command_centre,812,648
+engineer,812,712

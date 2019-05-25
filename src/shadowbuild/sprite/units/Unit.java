@@ -1,7 +1,6 @@
 package shadowbuild.sprite.units;
 
 import org.newdawn.slick.Image;
-import shadowbuild.control.GameController;
 import shadowbuild.control.SpritesController;
 import shadowbuild.sprite.*;
 import shadowbuild.sprite.effects.UnitHighlight;
@@ -72,21 +71,12 @@ public abstract class Unit extends RectSprite implements Selectable, Movable {
     public void select() {
         if (!selected) {
             selected = true;
-            if(SpritesController.getSelectedSprite() != null)
-                SpritesController.getSelectedSprite().unselect();
-            SpritesController.setSelectedSprite(this);
-            GameController.getMainCamera().follow(this);
-            SpritesController.addSprite(new UnitHighlight(this));
         }
     }
 
     @Override
     public void unselect() {
-        if (selected){
-            selected = false;
-            SpritesController.setSelectedSprite(null);
-            GameController.getMainCamera().unFollow();
-        }
+        selected = false;
     }
 
     @Override

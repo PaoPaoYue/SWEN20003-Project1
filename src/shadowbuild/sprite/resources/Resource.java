@@ -1,7 +1,7 @@
 package shadowbuild.sprite.resources;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
+import shadowbuild.control.Input;
 import shadowbuild.sprite.RectSprite;
 import shadowbuild.sprite.Triggerable;
 import shadowbuild.util.Vector2;

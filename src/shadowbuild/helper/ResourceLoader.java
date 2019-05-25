@@ -9,17 +9,14 @@ import shadowbuild.util.Vector2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ResourceLoader {
 
     private static HashMap<String, Image> imageHashMap = new HashMap<>();
 
-    public static List<Sprite> readCSV(String path) {
-        List<Sprite> initList = new ArrayList<>();
+    public static List<List<Sprite>> readCSV(String path) {
+        List<List<Sprite>> initList = new ArrayList<>();
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File(path));
@@ -27,17 +24,21 @@ public class ResourceLoader {
             e.printStackTrace();
         }
         while (scanner.hasNextLine()) {
-            String[] line = scanner.nextLine().split(",");
-            String spriteName = line[0];
-            int x = Integer.parseInt(line[1]);
-            int y = Integer.parseInt(line[2]);
-            try {
-                Sprite sprite = SpritesParser.getSpriteClass(toSpriteClassName(spriteName)).newInstance();
-                sprite.setPos(new Vector2(x, y));
-                initList.add(sprite);
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
+            List<Sprite> spritesList = new ArrayList<>();
+            String[] line;
+            while (scanner.hasNextLine() && (line = scanner.nextLine().split(",")).length == 3) {
+                String spriteName = line[0];
+                int x = Integer.parseInt(line[1]);
+                int y = Integer.parseInt(line[2]);
+                try {
+                    Sprite sprite = SpritesParser.getSpriteClass(toSpriteClassName(spriteName)).newInstance();
+                    sprite.setPos(new Vector2(x, y));
+                    spritesList.add(sprite);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
+            if (!spritesList.isEmpty()) initList.add(spritesList);
         }
         scanner.close();
         return initList;

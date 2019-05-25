@@ -1,10 +1,11 @@
 package shadowbuild.sprite;
 
-import org.newdawn.slick.Input;
+import shadowbuild.control.Input;
 import shadowbuild.control.coroutine.Task;
 import shadowbuild.control.coroutine.TaskExecutor;
 import shadowbuild.control.SpritesController;
 import shadowbuild.control.coroutine.TimeLimitedTask;
+import shadowbuild.player.Player;
 import shadowbuild.util.*;
 
 /**
@@ -13,6 +14,7 @@ import shadowbuild.util.*;
  */
 public abstract class Sprite {
     private Vector2 pos;
+    private Player player;
 
     public Sprite() {
         pos = new Vector2();
@@ -30,9 +32,19 @@ public abstract class Sprite {
         this.pos = pos;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     public void destroySelf() {
+        clearTask();
         SpritesController.removeSprite(this);
     }
+
 
     /**
      * Every subclass of Sprite should override these two methods
@@ -65,5 +77,4 @@ public abstract class Sprite {
     public void clearTask() {
         SpritesController.clearTask(this);
     }
-
 }

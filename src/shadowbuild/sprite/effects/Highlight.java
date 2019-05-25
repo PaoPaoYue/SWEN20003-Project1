@@ -1,10 +1,9 @@
 package shadowbuild.sprite.effects;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
+import shadowbuild.control.Input;
 import shadowbuild.sprite.RectSprite;
 import shadowbuild.sprite.Selectable;
-import shadowbuild.util.Vector2;
 
 public abstract class Highlight<T extends Selectable> extends RectSprite {
 
