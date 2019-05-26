@@ -3,6 +3,7 @@ package shadowbuild.control;
 import org.newdawn.slick.Graphics;
 import shadowbuild.camera.Camera;
 import shadowbuild.control.coroutine.Task;
+import shadowbuild.helper.Logger;
 import shadowbuild.helper.ResourceLoader;
 import shadowbuild.player.Player;
 import shadowbuild.sprite.Renderable;
@@ -121,6 +122,7 @@ public class SpritesController {
         for (Player player: GameController.getOtherPlayers()){
             othersSelectedSprites.put(player, null);
         }
+        addSprites();
     }
 
     public void update(InputController mainInput, Map<Player, NetworkInputController> othersInputs, int delta) {

@@ -45,7 +45,7 @@ public class GameController {
 
     public static void setClient() {
         isServer = false;
-
+        Logger.log("client");
         ClientController clientController = ClientController.getInstance();
         getInstance().mainPlayer = clientController.mainPlayer;
         getInstance().otherPlayers = clientController.otherPlayers;
@@ -62,7 +62,7 @@ public class GameController {
 
     public static void setServer() {
         isServer = true;
-
+        Logger.log("server");
         ServerController serverController = ServerController.getInstance();
         getInstance().mainPlayer = serverController.mainPlayer;
         getInstance().otherPlayers = serverController.otherPlayers;

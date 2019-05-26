@@ -137,7 +137,7 @@ public class Client {
 
     public void close() {
         lock.lock();
-        if(!clientSocket.isAlive()) return;
+        if(!doReceive) return;
         doReceive = false;
         if (receiveThread != null) {
             receiveThread.interrupt();

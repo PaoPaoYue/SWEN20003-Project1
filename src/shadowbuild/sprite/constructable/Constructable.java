@@ -18,7 +18,7 @@ public interface Constructable {
     default void construct(int optionIndex, Vector2 pos, boolean destroySelf){
         ConstructMenuItem constructTarget = getConstructMenu().getConstructMenuItem(optionIndex);
         if (constructTarget != null) {
-            PlayerGameInfo playerInfo = GameController.getMainPlayer().getGameInfo();
+            PlayerGameInfo playerInfo = ((Sprite)this).getPlayer().getGameInfo();
             if(playerInfo.changeMetalAmount(constructTarget.getMetalCost()) &&
                     playerInfo.changeUnobtainiumAmount(constructTarget.getUnobtainiumCost())){
                 getConstructMenu().setConstructTarget(constructTarget);

@@ -27,7 +27,7 @@ public class Input {
     }
 
 
-    int getTimeStamp() {
+    public int getTimeStamp() {
         return timeStamp;
     }
 

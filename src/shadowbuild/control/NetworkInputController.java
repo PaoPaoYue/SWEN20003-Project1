@@ -24,7 +24,7 @@ public class NetworkInputController {
 
     public void update(int delta) {
         Input input = inputQueue.peek();
-        if(input == null || (input.getTimeStamp() < timeStamp && input.getTimeStamp() > timeStamp - 1000)) {
+        if(input == null || (input.getTimeStamp() > timeStamp)) {
             this.input = Input.NO_INPUT;
         } else {
             this.input = inputQueue.poll();
@@ -37,7 +37,7 @@ public class NetworkInputController {
 
 
     public Input getInput() {
-        return  this.input;
+        return this.input;
     }
 
     public List<Input> getInputQueue() {
@@ -47,8 +47,8 @@ public class NetworkInputController {
     }
 
     public void addInputQueue(List<Input> inputList) {
-        if (preInit) {
-            timeStamp = input.getTimeStamp();
+        if (preInit && !inputList.isEmpty()) {
+            timeStamp = inputList.get(0).getTimeStamp();
             preInit = false;
         }
         if(inputList!= null &&  !inputList.isEmpty()) {

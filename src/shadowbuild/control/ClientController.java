@@ -99,9 +99,11 @@ public class ClientController {
     }
 
     public void closeClient() {
+        otherPlayers.clear();
         connectState = ConnectState.NO_CONNECTION;
         onGame = false;
-        if (postGameThread.isAlive()) postGameThread.interrupt();
+        postGameThread.interrupt();
+        Logger.info("Close client connection");
     }
 
     public void sendText(String text) {
@@ -113,7 +115,6 @@ public class ClientController {
     }
 
     public void onConnectionLost() {
-        otherPlayers.clear();
         closeClient();
     }
 

@@ -3,8 +3,12 @@ package shadowbuild.camera;
 import org.newdawn.slick.Input;
 import shadowbuild.control.GameController;
 import shadowbuild.control.GameCoordinate;
+import shadowbuild.control.SpritesController;
+import shadowbuild.helper.Logger;
 import shadowbuild.main.App;
 import shadowbuild.sprite.Selectable;
+import shadowbuild.sprite.Sprite;
+import shadowbuild.sprite.buildings.CommandCentre;
 import shadowbuild.util.Rect;
 import shadowbuild.util.Vector2;
 
@@ -53,7 +57,9 @@ public class Camera {
     }
 
     public void init() {
-        setPos(new Vector2(GameCoordinate.WORLD_MIDDLE_X, GameCoordinate.WORLD_MIDDLE_Y));
+        for (Sprite commandCentre: SpritesController.getSprites(CommandCentre.class, GameController.getMainPlayer())) {
+            setPos(commandCentre.getPos());
+        }
     }
 
     public void update(Input input, int delta) {

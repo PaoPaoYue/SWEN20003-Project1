@@ -136,12 +136,8 @@ public class ServerController {
     public void closeServer() {
         onConnect = false;
         onGame = false;
-        if (!publishPlayersThread.isAlive()) {
-            publishPlayersThread.interrupt();
-        }
-        if (!publishGameThread.isAlive()) {
-            publishPlayersThread.interrupt();
-        }
+        publishPlayersThread.interrupt();
+        publishPlayersThread.interrupt();
         server.close();
     }
 
