@@ -2,12 +2,16 @@ package shadowbuild.sprite.buildings;
 
 import shadowbuild.control.Input;
 import shadowbuild.helper.ResourceLoader;
+import shadowbuild.sprite.Triggerable;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
+import shadowbuild.sprite.units.Builder;
+import shadowbuild.sprite.units.Engineer;
+import shadowbuild.sprite.units.Scout;
 import shadowbuild.util.Vector2;
 
-public class CommandCentre extends Building implements Constructable {
+public class CommandCentre extends Building implements Constructable, Triggerable {
 
     private static final String IMG_PATH = "assets/buildings/command_centre.png";
 
@@ -27,9 +31,9 @@ public class CommandCentre extends Building implements Constructable {
     @Override
     public void init() {
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("Scout", scoutCost, 0, constructTime),
-                new ConstructMenuItem("Builder", builderCost, 0, constructTime),
-                new ConstructMenuItem("Engineer", engineerCost, 0, constructTime)
+                new ConstructMenuItem(Scout.class, scoutCost, 0, constructTime),
+                new ConstructMenuItem(Builder.class, builderCost, 0, constructTime),
+                new ConstructMenuItem(Engineer.class, engineerCost, 0, constructTime)
         );
     }
 
@@ -51,5 +55,14 @@ public class CommandCentre extends Building implements Constructable {
     @Override
     public ConstructMenu getConstructMenu() {
         return constructMenu;
+    }
+
+    @Override
+    public boolean isTriggered() {
+        return true;
+    }
+
+    @Override
+    public void trigger() {
     }
 }

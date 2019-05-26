@@ -1,5 +1,7 @@
 package shadowbuild.control;
 
+import com.alibaba.fastjson.JSON;
+import shadowbuild.helper.Logger;
 import shadowbuild.network.Client;
 import shadowbuild.network.message.*;
 import shadowbuild.player.Player;
@@ -96,11 +98,10 @@ public class ClientController {
         client = new Client(hostname, port);
     }
 
-    public void CloseClient() {
+    public void closeClient() {
         connectState = ConnectState.NO_CONNECTION;
-        onGame = true;
+        onGame = false;
         if (postGameThread.isAlive()) postGameThread.interrupt();
-        client.close();
     }
 
     public void sendText(String text) {
@@ -113,7 +114,7 @@ public class ClientController {
 
     public void onConnectionLost() {
         otherPlayers.clear();
-        connectState = ConnectState.NO_CONNECTION;
+        closeClient();
     }
 
     public void onConnectionInterrupted() {
@@ -156,7 +157,10 @@ public class ClientController {
 
     public void onReceivePublishGame(PublishGameMessage message) {
         for(Player player: otherPlayers) {
-            othersInputs.get(player).addInputQueue(message.playerInputList(player.getId()));
+            List<Input> inputList = message.playerInputList(player.getId());
+            if(!inputList.isEmpty()) {
+                othersInputs.get(player).addInputQueue(inputList);
+            }
         }
     }
 

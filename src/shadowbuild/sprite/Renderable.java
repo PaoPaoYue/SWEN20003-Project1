@@ -1,6 +1,8 @@
 package shadowbuild.sprite;
 
+import org.newdawn.slick.Graphics;
 import shadowbuild.camera.Camera;
+
 
 public interface Renderable extends Comparable<Renderable>{
 
@@ -11,5 +13,5 @@ public interface Renderable extends Comparable<Renderable>{
 
     int getRenderLayer();
 
-    void render(Camera camera);
+    void render(Camera camera, Graphics g);
 }

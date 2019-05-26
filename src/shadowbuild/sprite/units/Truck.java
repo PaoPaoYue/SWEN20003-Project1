@@ -2,6 +2,7 @@ package shadowbuild.sprite.units;
 
 import shadowbuild.control.Input;
 import shadowbuild.helper.ResourceLoader;
+import shadowbuild.sprite.buildings.CommandCentre;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
@@ -27,7 +28,7 @@ public class Truck extends Unit implements Constructable {
     public void init() {
         setSpeed(0.25);
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("CommandCentre", 0, 0, constructTime)
+                new ConstructMenuItem(CommandCentre.class, 0, 0, constructTime)
         );
     }
 

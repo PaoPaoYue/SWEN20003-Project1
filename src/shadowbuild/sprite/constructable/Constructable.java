@@ -34,6 +34,7 @@ public interface Constructable {
                         e.printStackTrace();
                     }
                     getConstructMenu().setConstructTarget(null);
+                    getConstructMenu().setProgress(0);
                     if(destroySelf) ((Sprite)this).destroySelf();
                     task.stop();
                 });

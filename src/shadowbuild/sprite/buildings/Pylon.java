@@ -1,9 +1,12 @@
 package shadowbuild.sprite.buildings;
 
 import shadowbuild.control.Input;
+import shadowbuild.control.SpritesController;
 import shadowbuild.helper.ResourceLoader;
+import shadowbuild.sprite.Sprite;
 import shadowbuild.sprite.Triggerable;
 import shadowbuild.sprite.units.Engineer;
+import shadowbuild.sprite.units.Unit;
 import shadowbuild.util.Vector2;
 
 public class Pylon extends Building implements Triggerable {
@@ -30,7 +33,10 @@ public class Pylon extends Building implements Triggerable {
 
     @Override
     public void update(Input input, int delta) {
-
+        if(isTriggered()) return;
+        for (Sprite sprite: SpritesController.getSprites(Unit.class)) {
+            if (canTrigger(sprite.getPos())) trigger();
+        }
     }
 
     @Override

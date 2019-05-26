@@ -6,6 +6,7 @@ import shadowbuild.camera.Camera;
 import shadowbuild.gui.GUI;
 import shadowbuild.gui.GameUI;
 import shadowbuild.gui.UIstate;
+import shadowbuild.helper.Logger;
 import shadowbuild.player.Player;
 import shadowbuild.terrain.Terrain;
 
@@ -121,7 +122,7 @@ public class GameController {
 
     public void render(Graphics g){
         mainTerrain.render(mainCamera);
-        spritesController.render(mainCamera);
+        spritesController.render(mainCamera, g);
         gameUI.render(g);
     }
 }

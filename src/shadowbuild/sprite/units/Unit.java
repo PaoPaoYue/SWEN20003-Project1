@@ -44,7 +44,6 @@ public abstract class Unit extends RectSprite implements Selectable, Movable {
             Vector2 pos = getPos().move(orientation, speed * coroutineDelta);
             if(canMove(pos)) {
                 setPos(pos);
-                triggerPylon();
             } else
                 task.stop();
         });
@@ -56,7 +55,6 @@ public abstract class Unit extends RectSprite implements Selectable, Movable {
             Vector2 pos = getPos().moveTowards(destination, speed * coroutineDelta);
             if(canMove(pos)) {
                 setPos(pos);
-                triggerPylon();
             } else
                 task.stop();
         });
@@ -85,13 +83,4 @@ public abstract class Unit extends RectSprite implements Selectable, Movable {
         super.destroySelf();
     }
 
-    private void triggerPylon() {
-        Set<Sprite> pylons = SpritesController.getSprites("Pylon");
-        for (Sprite pylon : pylons) {
-            Triggerable triggerable = (Triggerable)pylon;
-            if(triggerable.canTrigger(getPos()) && !triggerable.isTriggered()) {
-                triggerable.trigger();
-            }
-        }
-    }
 }

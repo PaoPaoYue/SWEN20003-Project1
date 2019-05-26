@@ -1,14 +1,13 @@
 package shadowbuild.control;
 
+import org.newdawn.slick.Graphics;
 import shadowbuild.camera.Camera;
 import shadowbuild.control.coroutine.Task;
-import shadowbuild.helper.Logger;
 import shadowbuild.helper.ResourceLoader;
 import shadowbuild.player.Player;
 import shadowbuild.sprite.Renderable;
 import shadowbuild.sprite.Selectable;
 import shadowbuild.sprite.Sprite;
-import shadowbuild.sprite.SpritesParser;
 import shadowbuild.sprite.buildings.Building;
 import shadowbuild.sprite.effects.BuildingHighlight;
 import shadowbuild.sprite.effects.UnitHighlight;
@@ -16,6 +15,7 @@ import shadowbuild.sprite.units.Unit;
 import shadowbuild.util.Vector2;
 
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -67,12 +67,20 @@ public class SpritesController {
         getInstance().spriteRemoveQueue.offer(sprite);
     }
 
-    public static Set<Sprite> getSprites(String spriteClassName) {
-        return getInstance().sprites.get(SpritesParser.getSpriteClass(spriteClassName));
+    public static Set<Sprite> getSprites(Class<? extends Sprite> spriteClass) {
+        Set<Sprite> res = getInstance().sprites.get(spriteClass);
+        if(res != null) return res;
+        res = new HashSet<>();
+        for (Map.Entry<Class<? extends Sprite>, HashSet<Sprite>> entry : getInstance().sprites.entrySet()) {
+            if (spriteClass.isAssignableFrom(entry.getKey()))
+                res.addAll(entry.getValue());
+        }
+        return res;
+
     }
 
-    public static Set<Sprite> getSprites(String spriteClassName, Player player) {
-        return getInstance().sprites.get(SpritesParser.getSpriteClass(spriteClassName)).stream().filter((item)-> item.getPlayer().equals(player)).collect(Collectors.toSet());
+    public static Set<Sprite> getSprites(Class<? extends Sprite> spriteClass, Player player) {
+        return getSprites(spriteClass).stream().filter((item)-> item.getPlayer().equals(player)).collect(Collectors.toSet());
     }
 
     /** reset all the coroutine task on a specif sprite */
@@ -128,7 +136,7 @@ public class SpritesController {
         }
     }
 
-    public void render(Camera camera) {
+    public void render(Camera camera, Graphics g) {
         /** render all rectSprites */
         List<Renderable> renderQueue = new ArrayList<>();
         for (Map.Entry<Class<? extends Sprite>, HashSet<Sprite>> entry : sprites.entrySet()) {
@@ -140,7 +148,7 @@ public class SpritesController {
         }
         Collections.sort(renderQueue);
         for (Renderable sprite: renderQueue) {
-            sprite.render(camera);
+            sprite.render(camera, g);
         }
     }
 

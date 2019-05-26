@@ -1,8 +1,5 @@
 package shadowbuild.control;
 
-import com.alibaba.fastjson.JSON;
-import org.lwjgl.Sys;
-import shadowbuild.helper.Logger;
 import shadowbuild.util.Vector2;
 
 import java.util.LinkedList;
@@ -37,6 +34,10 @@ public class InputController {
             }
             if(input.isKeyPressed(org.newdawn.slick.Input.KEY_2)) {
                 keys[1] = 1;
+                flag = true;
+            }
+            if(input.isKeyPressed(org.newdawn.slick.Input.KEY_3)) {
+                keys[1] = 3;
                 flag = true;
             }
             if (input.isMousePressed(org.newdawn.slick.Input.MOUSE_LEFT_BUTTON)) {

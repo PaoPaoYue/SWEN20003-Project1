@@ -1,8 +1,12 @@
 package shadowbuild.sprite;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import shadowbuild.camera.Camera;
+import shadowbuild.control.GameController;
 import shadowbuild.control.GameCoordinate;
+import shadowbuild.sprite.constructable.Constructable;
 import shadowbuild.util.*;
 
 /**
@@ -47,12 +51,21 @@ public abstract class RectSprite extends Sprite implements Renderable{
 
     /** render the rectSprite to the screen */
     @Override
-    public void render(Camera camera) {
+    public void render(Camera camera, Graphics g) {
         /** only render if the image specified and inside the view of camera */
         if(image != null && region.collide(camera.getScope())) {
             Vector2 renderStart = GameCoordinate.worldToScreen(new Vector2(getPos().getX(),getPos().getY()));
             image.drawCentered((float) renderStart.getX(), (float)renderStart.getY());
+            if (this instanceof Constructable && ((Sprite)this).getPlayer().equals(GameController.getMainPlayer())) {
+                Constructable constructable = (Constructable)this;
+                if (constructable.isConstructing()) {
+                    double progress = constructable.getConstructMenu().getProgress();
+                    g.setColor(Color.green);
+                    g.fillRect((float) renderStart.getX() - 10, (float) renderStart.getY() - 15, (float)(20*progress), 3);
+                }
+            }
         }
+
     }
 
 }

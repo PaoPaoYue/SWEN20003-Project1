@@ -66,18 +66,24 @@ public class ServerController {
                 try {
                     Thread.sleep(PUBLISH_INTERVAL);
                 } catch (InterruptedException e) {}
+
+                Map<Player, List<Input>> tempInputs = new HashMap<>();
+                tempInputs.put(mainPlayer, mainInput.getInputQueue());
+                for (Player otherPlayer: getOtherPlayers()){
+                    tempInputs.put(otherPlayer, othersInputs.get(otherPlayer).getInputQueue());
+                }
+
                 for (Player otherPlayer: getOtherPlayers()) {
                     int[] ids = new int[otherPlayers.size()];
                     List<List<Input>> inputs = new ArrayList<>();
 
                     int i = 0;
                     ids[i] = 0;
-                    inputs.add(mainInput.getInputQueue());
-                    for (Player player: getOtherPlayers()) {
-                        if (otherPlayer.equals(player)) continue;
-                        ids[i] = player.getId();
-                        inputs.add(othersInputs.get(player).getInputQueue());
-                        i++;
+                    inputs.add(tempInputs.get(mainPlayer));
+                    for (Player inputOwner: getOtherPlayers()) {
+                        if (otherPlayer.equals(inputOwner)) continue;
+                        ids[++i] = inputOwner.getId();
+                        inputs.add(tempInputs.get(inputOwner));
                     }
                     server.send(otherPlayer.getId(), new PublishGameMessage(ids, inputs),null);
                 }
@@ -182,10 +188,12 @@ public class ServerController {
     }
 
     public void onReceiveText(TextMessage message) {
-        server.publish(message, null);
         for (Player player: otherPlayers) {
-            if (player.getId() == message.getId())
-                GameController.getGameUI().getTextbox().addMessage("["+ player.getPlayerName() + "]: " + message.getText());
+            if (player.getId() == message.getId()) {
+                GameController.getGameUI().getTextbox().addMessage("[" + player.getPlayerName() + "]: " + message.getText());
+            } else {
+                server.send(player.getId(), message, null);
+            }
         }
     }
 

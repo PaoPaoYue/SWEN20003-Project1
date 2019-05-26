@@ -9,7 +9,9 @@ import shadowbuild.network.message.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Test {
 
@@ -42,6 +44,12 @@ public class Test {
     }
 
     public static void main(String args[]) {
+
+        List<Integer> list = new ArrayList<>();
+        list.add(0);
+        list.add(2);
+        list.add(4);
+        System.out.println(list.get(2));
 
 //        PostGameMessage message = new PostGameMessage(0, Input.NO_INPUT);
 //        String json = JSON.toJSONString(message);

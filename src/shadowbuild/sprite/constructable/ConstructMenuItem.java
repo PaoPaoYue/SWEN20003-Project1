@@ -9,8 +9,8 @@ public class ConstructMenuItem {
     private int unobtainiumCost;
     private int constructTime;
 
-    public ConstructMenuItem(String spriteClassName, int metalCost, int unobtainiumCost, int constructTime) {
-        this.spriteClass = SpritesParser.getSpriteClass(spriteClassName);
+    public ConstructMenuItem(Class<? extends Sprite> spriteClass, int metalCost, int unobtainiumCost, int constructTime) {
+        this.spriteClass = spriteClass;
         this.metalCost = metalCost;
         this.unobtainiumCost = unobtainiumCost;
         this.constructTime = constructTime;

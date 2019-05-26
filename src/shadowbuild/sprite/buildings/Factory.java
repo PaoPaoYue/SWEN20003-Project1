@@ -5,6 +5,7 @@ import shadowbuild.helper.ResourceLoader;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
+import shadowbuild.sprite.units.Truck;
 import shadowbuild.util.Vector2;
 
 public class Factory extends Building implements Constructable {
@@ -27,7 +28,7 @@ public class Factory extends Building implements Constructable {
     @Override
     public void init() {
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("Truck", truckCost, 0, constructTime)
+                new ConstructMenuItem(Truck.class, truckCost, 0, constructTime)
         );
     }
 

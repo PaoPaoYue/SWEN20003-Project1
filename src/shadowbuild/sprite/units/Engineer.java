@@ -8,6 +8,7 @@ import shadowbuild.sprite.Sprite;
 import shadowbuild.sprite.buildings.CommandCentre;
 import shadowbuild.sprite.resources.Metal;
 import shadowbuild.sprite.resources.Resource;
+import shadowbuild.sprite.resources.Unobtainium;
 import shadowbuild.util.*;
 
 public class Engineer extends Unit{
@@ -52,22 +53,23 @@ public class Engineer extends Unit{
                 if(resource != null) {
                     mineTarget = resource;
                     if(load > 0)
-                        goToCentre();
+                        goToCentre(findNearestCentre());
                     else
-                        goToMine(destination);
+                        goToMine(resource);
                 }
                 else {
-                    mineTarget = null;
-                    moveTowards(destination);
+                    CommandCentre commandCentre = detectCommandCentre(destination);
+                    if (commandCentre != null) goToCentre(commandCentre);
+                    else moveTowards(destination);
                 }
             }
         }
     }
 
-    private void goToMine(Vector2 destination) {
-        moveTowards(destination);
+    private void goToMine(Resource resource) {
+        moveTowards(resource.getPos());
         addTask((task, delta) -> {
-            if(getPos().equals(destination)){
+            if(getPos().equals(resource.getPos())){
                 mine();
             }
             task.stop();
@@ -83,13 +85,13 @@ public class Engineer extends Unit{
         addTask((task, delta) -> {
             load += mineTarget.reduceCapacity(mineRate - load);
             if(mineTarget.isEmpty()) this.mineTarget = null;
-            goToCentre();
+            goToCentre(findNearestCentre());
             task.stop();
         });
     }
 
-    private void goToCentre() {
-        Vector2 nearestCentrePos = findNearestCentre().getPos();
+    private void goToCentre(CommandCentre commandCentre) {
+        Vector2 nearestCentrePos = commandCentre.getPos();
         Vector2 destination = nearestCentrePos.subtract(getPos().orientation(nearestCentrePos).multiply(32));
 
         moveTowards(destination);
@@ -104,22 +106,26 @@ public class Engineer extends Unit{
                     this.mineTarget = null;
                     task.stop();
                 } else
-                    goToMine(mineTarget.getPos());
+                    goToMine(mineTarget);
             }
             task.stop();
         });
     }
 
     private Resource detectResource(Vector2 pos) {
-        for(Sprite sprite: SpritesController.getSprites("Metal")) {
+        for(Sprite sprite: SpritesController.getSprites(Resource.class)) {
             Resource resource = (Resource) sprite;
             if(resource.canTrigger(pos))
                 return resource;
         }
-        for(Sprite sprite: SpritesController.getSprites("Unobtainium")) {
-            Resource resource = (Resource) sprite;
-            if(resource.canTrigger(pos))
-                return resource;
+        return null;
+    }
+
+    private CommandCentre detectCommandCentre(Vector2 pos) {
+        for(Sprite sprite: SpritesController.getSprites(CommandCentre.class)) {
+            CommandCentre commandCentre = (CommandCentre) sprite;
+            if(commandCentre.canTrigger(pos))
+                return commandCentre;
         }
         return null;
     }
@@ -128,7 +134,7 @@ public class Engineer extends Unit{
     private CommandCentre findNearestCentre() {
         CommandCentre centre = null;
         double minDistance = Double.MAX_VALUE;
-        for (Sprite sprite: SpritesController.getSprites("CommandCentre", this.getPlayer())) {
+        for (Sprite sprite: SpritesController.getSprites(CommandCentre.class, this.getPlayer())) {
             Double distance = getPos().distance(sprite.getPos());
             if(distance < minDistance) {
                 minDistance = distance;

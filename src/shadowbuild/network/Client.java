@@ -17,10 +17,14 @@ import shadowbuild.network.message.MessageType;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Client {
 
     private static final int Mbps = 1;
+
+    private Lock lock = new ReentrantLock();
 
     private InetSocketAddress bindAddress;
     private DragoniteClientSocket clientSocket;
@@ -112,22 +116,28 @@ public class Client {
     }
 
     public <T extends Message> void send(T message, ClientFailureCallback callback) {
-        if(!clientSocket.isAlive())
+        if(clientSocket.isAlive()) {
+            try {
+                clientSocket.send(MessageParser.toBytes(message));
+            } catch (InterruptedException | IncorrectSizeException | IOException e) {
+                Logger.error("Sending message... fatal exception happened");
+                close();
+                if(callback != null)callback.run();
+            } catch (SenderClosedException e) {
+                Logger.error("Sending message... Socket receiver lost connection");
+                close();
+                if(callback != null)callback.run();
+            }
+        } else {
             Logger.warn("Sending message... Dragonite connection closed by accident");
-        try {
-            clientSocket.send(MessageParser.toBytes(message));
-        } catch (InterruptedException | IncorrectSizeException | IOException e) {
-            Logger.error("Sending message... fatal exception happened");
-            close();
-            if(callback != null)callback.run();
-        } catch (SenderClosedException e) {
-            Logger.error("Sending message... Socket receiver lost connection");
-            close();
-            if(callback != null)callback.run();
         }
+
+
     }
 
     public void close() {
+        lock.lock();
+        if(!clientSocket.isAlive()) return;
         doReceive = false;
         if (receiveThread != null) {
             receiveThread.interrupt();
@@ -137,6 +147,7 @@ public class Client {
         } catch (InterruptedException | IOException | SenderClosedException e) {}
 
         clientNetworkController.onConnectionLost();
+        lock.unlock();
     }
 
 

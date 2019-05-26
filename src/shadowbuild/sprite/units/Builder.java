@@ -2,6 +2,7 @@ package shadowbuild.sprite.units;
 
 import shadowbuild.control.Input;
 import shadowbuild.helper.ResourceLoader;
+import shadowbuild.sprite.buildings.Factory;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
@@ -28,7 +29,7 @@ public class Builder extends Unit implements Constructable {
     public void init() {
         setSpeed(0.1);
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("Factory", factoryCost, 0, constructTime)
+                new ConstructMenuItem(Factory.class, factoryCost, 0, constructTime)
         );
     }
 

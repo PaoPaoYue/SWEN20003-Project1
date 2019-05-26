@@ -1,5 +1,7 @@
 package shadowbuild.control;
 
+import shadowbuild.helper.Logger;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -49,8 +51,10 @@ public class NetworkInputController {
             timeStamp = input.getTimeStamp();
             preInit = false;
         }
-        inputQueue.addAll(inputList);
-        networkInputQueue.addAll(inputList);
+        if(inputList!= null &&  !inputList.isEmpty()) {
+            inputQueue.addAll(inputList);
+            networkInputQueue.addAll(inputList);
+        }
     }
 
 }
