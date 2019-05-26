@@ -41,7 +41,6 @@ public abstract class Sprite {
     }
 
     public void destroySelf() {
-        clearTask();
         SpritesController.removeSprite(this);
     }
 

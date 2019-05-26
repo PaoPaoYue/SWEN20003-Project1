@@ -24,7 +24,7 @@ public class GameUI extends GUI{
 
     public GameUI(UIstate state) {
         super(state);
-        textbox = new Textbox(50, 800, 8, 40);
+        textbox = new Textbox(32, 700, 8, 40);
     }
 
     public Textbox getTextbox() {
