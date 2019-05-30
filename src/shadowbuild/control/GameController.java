@@ -51,7 +51,6 @@ public class GameController {
     public void init(){
         spritesController.init();
         mainCamera.init();
-        mainPlayer.getInfo().changeMetalAmount(1000);
     }
 
     public void update(Input input, int delta){

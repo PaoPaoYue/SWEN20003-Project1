@@ -15,8 +15,9 @@ public class Engineer extends Unit{
 
     private static final String IMG_PATH = "assets/units/engineer.png";
 
+    private static final int MINE_TIME = 5000;
+
     private static int mineRate = 2;
-    private static int mineTime = 5000;
     private int load;
 
     private Resource mineTarget;
@@ -48,27 +49,32 @@ public class Engineer extends Unit{
         if(isSelected()) {
             if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
                 /** Get the mouse input and convert to position in the world coordinate system */
-                Vector2 destination = GameCoordinate.screenToWorld(new Vector2(input.getMouseX(), input.getMouseY()));
-                Resource resource = detectResource(destination);
+                Vector2 pos = GameCoordinate.screenToWorld(new Vector2(input.getMouseX(), input.getMouseY()));
+                Resource resource = detectResource(pos);
+                CommandCentre commandCentre = detectCommandCentre(pos);
                 if(resource != null) {
                     mineTarget = resource;
                     if(load > 0)
-                        goToCentre();
+                        goToCentre(findNearestCentre());
                     else
-                        goToMine(destination);
+                        goToMine(resource);
                 }
-                else {
-                    mineTarget = null;
-                    moveTowards(destination);
+                else if (commandCentre != null) {
+                    if (load > 0)
+                        goToCentre(commandCentre);
+                    else
+                        moveTowards(pos);
                 }
+                else
+                    moveTowards(pos);
             }
         }
     }
 
-    private void goToMine(Vector2 destination) {
-        moveTowards(destination);
+    private void goToMine(Resource mineTarget) {
+        moveTowards(mineTarget.getPos());
         addTask((task, delta) -> {
-            if(getPos().equals(destination)){
+            if(getPos().equals(mineTarget.getPos())){
                 mine();
             }
             task.stop();
@@ -80,17 +86,17 @@ public class Engineer extends Unit{
             this.mineTarget = null;
             return;
         }
-        setTask(null, mineTime);
+        setTask(null, MINE_TIME);
         addTask((task, delta) -> {
             load += mineTarget.reduceCapacity(mineRate - load);
             if(mineTarget.isEmpty()) this.mineTarget = null;
-            goToCentre();
+            goToCentre(findNearestCentre());
             task.stop();
         });
     }
 
-    private void goToCentre() {
-        Vector2 nearestCentrePos = findNearestCentre().getPos();
+    private void goToCentre(CommandCentre commandCentre) {
+        Vector2 nearestCentrePos = commandCentre.getPos();
         Vector2 destination = nearestCentrePos.subtract(getPos().orientation(nearestCentrePos).multiply(32));
 
         moveTowards(destination);
@@ -105,19 +111,23 @@ public class Engineer extends Unit{
                     this.mineTarget = null;
                     task.stop();
                 } else
-                    goToMine(mineTarget.getPos());
+                    goToMine(mineTarget);
             }
             task.stop();
         });
     }
 
-    private Resource detectResource(Vector2 pos) {
-        for(Sprite sprite: SpritesController.getSprites("Metal")) {
-            Resource resource = (Resource) sprite;
-            if(resource.canTrigger(pos))
-                return resource;
+    private CommandCentre detectCommandCentre(Vector2 pos) {
+        for(Sprite sprite: SpritesController.getSprites(CommandCentre.class)) {
+            CommandCentre commandCentre = (CommandCentre) sprite;
+            if(commandCentre.canTrigger(pos))
+                return commandCentre;
         }
-        for(Sprite sprite: SpritesController.getSprites("Unobtainium")) {
+        return null;
+    }
+
+    private Resource detectResource(Vector2 pos) {
+        for(Sprite sprite: SpritesController.getSprites(Resource.class)) {
             Resource resource = (Resource) sprite;
             if(resource.canTrigger(pos))
                 return resource;
@@ -129,7 +139,7 @@ public class Engineer extends Unit{
     private CommandCentre findNearestCentre() {
         CommandCentre centre = null;
         double minDistance = Double.MAX_VALUE;
-        for (Sprite sprite: SpritesController.getSprites("CommandCentre")) {
+        for (Sprite sprite: SpritesController.getSprites(CommandCentre.class)) {
             Double distance = getPos().distance(sprite.getPos());
             if(distance < minDistance) {
                 minDistance = distance;

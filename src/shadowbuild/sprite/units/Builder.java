@@ -3,6 +3,7 @@ package shadowbuild.sprite.units;
 import org.newdawn.slick.Input;
 import shadowbuild.control.GameCoordinate;
 import shadowbuild.helper.ResourceLoader;
+import shadowbuild.sprite.buildings.Factory;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
@@ -12,8 +13,8 @@ public class Builder extends Unit implements Constructable {
 
     private static final String IMG_PATH = "assets/units/builder.png";
 
-    private static int factoryCost = -100;
-    private static int constructTime = 10000;
+    private static final int FACTORY_COST = -100;
+    private static final int CONSTRUCT_TIME = 10000;
 
     private ConstructMenu constructMenu;
 
@@ -29,7 +30,7 @@ public class Builder extends Unit implements Constructable {
     public void init() {
         setSpeed(0.1);
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("Factory", factoryCost, 0, constructTime)
+                new ConstructMenuItem(Factory.class, FACTORY_COST, 0, CONSTRUCT_TIME)
         );
     }
 

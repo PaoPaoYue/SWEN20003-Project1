@@ -3,19 +3,23 @@ package shadowbuild.sprite.buildings;
 import org.newdawn.slick.Input;
 
 import shadowbuild.helper.ResourceLoader;
+import shadowbuild.sprite.Triggerable;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
+import shadowbuild.sprite.units.Builder;
+import shadowbuild.sprite.units.Engineer;
+import shadowbuild.sprite.units.Scout;
 import shadowbuild.util.Vector2;
 
-public class CommandCentre extends Building implements Constructable {
+public class CommandCentre extends Building implements Constructable, Triggerable {
 
     private static final String IMG_PATH = "assets/buildings/command_centre.png";
 
-    private static int scoutCost = -5;
-    private static int builderCost = -10;
-    private static int engineerCost = -20;
-    private static int constructTime = 5000;
+    private static final int SCOUT_COST = -5;
+    private static final int BUILDER_COST = -10;
+    private static final int ENGINEER_COST = -20;
+    private static final int CONSTRUCT_TIME = 5000;
 
     private ConstructMenu constructMenu;
 
@@ -28,9 +32,9 @@ public class CommandCentre extends Building implements Constructable {
     @Override
     public void init() {
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("Scout", scoutCost, 0, constructTime),
-                new ConstructMenuItem("Builder", builderCost, 0, constructTime),
-                new ConstructMenuItem("Engineer", engineerCost, 0, constructTime)
+                new ConstructMenuItem(Scout.class, SCOUT_COST, 0, CONSTRUCT_TIME),
+                new ConstructMenuItem(Builder.class, BUILDER_COST, 0, CONSTRUCT_TIME),
+                new ConstructMenuItem(Engineer.class, ENGINEER_COST, 0, CONSTRUCT_TIME)
         );
     }
 
@@ -53,4 +57,12 @@ public class CommandCentre extends Building implements Constructable {
     public ConstructMenu getConstructMenu() {
         return constructMenu;
     }
+
+    @Override
+    public boolean isTriggered() {
+        return false;
+    }
+
+    @Override
+    public void trigger() { }
 }

@@ -52,9 +52,7 @@ public abstract class Resource extends RectSprite implements Triggerable {
     }
 
     @Override
-    public void trigger() {
-
-    }
+    public void trigger() { }
 
     @Override
     public int getRenderLayer() {

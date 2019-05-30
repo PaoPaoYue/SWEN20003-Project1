@@ -3,6 +3,7 @@ package shadowbuild.sprite.units;
 import org.newdawn.slick.Input;
 import shadowbuild.control.GameCoordinate;
 import shadowbuild.helper.ResourceLoader;
+import shadowbuild.sprite.buildings.CommandCentre;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
@@ -12,7 +13,7 @@ public class Truck extends Unit implements Constructable {
 
     private static final String IMG_PATH = "assets/units/truck.png";
 
-    private static int constructTime = 15000;
+    private static final int CONSTRUCT_TIME = 15000;
 
     private ConstructMenu constructMenu;
 
@@ -28,7 +29,7 @@ public class Truck extends Unit implements Constructable {
     public void init() {
         setSpeed(0.25);
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("CommandCentre", 0, 0, constructTime)
+                new ConstructMenuItem(CommandCentre.class, 0, 0, CONSTRUCT_TIME)
         );
     }
 

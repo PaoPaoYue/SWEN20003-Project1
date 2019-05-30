@@ -5,14 +5,15 @@ import shadowbuild.helper.ResourceLoader;
 import shadowbuild.sprite.constructable.ConstructMenu;
 import shadowbuild.sprite.constructable.ConstructMenuItem;
 import shadowbuild.sprite.constructable.Constructable;
+import shadowbuild.sprite.units.Truck;
 import shadowbuild.util.Vector2;
 
 public class Factory extends Building implements Constructable {
 
     private static final String IMG_PATH = "assets/buildings/factory.png";
 
-    private static int truckCost = -150;
-    private static int constructTime = 5000;
+    private static final int TRUCK_COST = -150;
+    private static final int CONSTRUCT_TIME = 5000;
 
     private ConstructMenu constructMenu;
 
@@ -27,7 +28,7 @@ public class Factory extends Building implements Constructable {
     @Override
     public void init() {
         constructMenu = new ConstructMenu(
-                new ConstructMenuItem("Truck", truckCost, 0, constructTime)
+                new ConstructMenuItem(Truck.class, TRUCK_COST, 0, CONSTRUCT_TIME)
         );
     }
 

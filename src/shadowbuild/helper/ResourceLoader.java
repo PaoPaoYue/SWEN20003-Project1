@@ -4,40 +4,55 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import shadowbuild.sprite.Sprite;
-import shadowbuild.sprite.SpritesParser;
+import shadowbuild.sprite.buildings.CommandCentre;
+import shadowbuild.sprite.buildings.Factory;
+import shadowbuild.sprite.buildings.Pylon;
+import shadowbuild.sprite.resources.Metal;
+import shadowbuild.sprite.resources.Unobtainium;
+import shadowbuild.sprite.units.Builder;
+import shadowbuild.sprite.units.Engineer;
+import shadowbuild.sprite.units.Scout;
+import shadowbuild.sprite.units.Truck;
 import shadowbuild.util.Vector2;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ResourceLoader {
 
-    private static HashMap<String, Image> imageHashMap = new HashMap<>();
+    private static Map<String, Image> imageMap = new HashMap<>();
+    private static Map<String, Class<? extends Sprite>> spritesClassMap = new HashMap<>();
 
-    public static List<Sprite> readCSV(String path) {
-        List<Sprite> initList = new ArrayList<>();
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(new File(path));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    static {
+        spritesClassMap.put("builder", Builder.class);
+        spritesClassMap.put("engineer", Engineer.class);
+        spritesClassMap.put("scout", Scout.class);
+        spritesClassMap.put("truck", Truck.class);
+        spritesClassMap.put("metal_mine", Metal.class);
+        spritesClassMap.put("unobtainium_mine", Unobtainium.class);
+        spritesClassMap.put("factory", Factory.class);
+        spritesClassMap.put("pylon", Pylon.class);
+        spritesClassMap.put("command_centre", CommandCentre.class);
+    }
+
+    public static List<List<Sprite>> readCSV(String path) {
+        List<List<Sprite>> initList = new ArrayList<>();
+        Scanner scanner = new Scanner(org.newdawn.slick.util.ResourceLoader.getResourceAsStream(path));
         while (scanner.hasNextLine()) {
-            String[] line = scanner.nextLine().split(",");
-            String spriteName = line[0];
-            int x = Integer.parseInt(line[1]);
-            int y = Integer.parseInt(line[2]);
-            try {
-                Sprite sprite = SpritesParser.getSpriteClass(toSpriteClassName(spriteName)).newInstance();
-                sprite.setPos(new Vector2(x, y));
-                initList.add(sprite);
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
+            List<Sprite> spritesList = new ArrayList<>();
+            String[] line;
+            while (scanner.hasNextLine() && (line = scanner.nextLine().split(",")).length == 3) {
+                String spriteName = line[0];
+                int x = Integer.parseInt(line[1]);
+                int y = Integer.parseInt(line[2]);
+                try {
+                    Sprite sprite = spritesClassMap.get(spriteName).newInstance();
+                    sprite.setPos(new Vector2(x, y));
+                    spritesList.add(sprite);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
+            if (!spritesList.isEmpty()) initList.add(spritesList);
         }
         scanner.close();
         return initList;
@@ -53,13 +68,13 @@ public class ResourceLoader {
     }
 
     public static Image readImage(String path) {
-        if(imageHashMap.containsKey(path)) {
-            return imageHashMap.get(path).copy();
+        if(imageMap.containsKey(path)) {
+            return imageMap.get(path).copy();
         }
         else {
             try {
                 Image image = new Image(path);
-                imageHashMap.put(path, image);
+                imageMap.put(path, image);
                 return image;
             } catch (SlickException e) {
                 e.printStackTrace();
