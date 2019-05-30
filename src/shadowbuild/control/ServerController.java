@@ -97,7 +97,6 @@ public class ServerController {
 
     public void setMainPlayer(Player mainPlayer) {
         this.mainPlayer = mainPlayer;
-        mainPlayer.getGameInfo().changeMetalAmount(1000);
         this.mainInput = new InputController();
     }
 
@@ -114,7 +113,6 @@ public class ServerController {
 
     public void addPlayer(Player player) {
         otherPlayers.add(player);
-        player.getGameInfo().changeMetalAmount(1000);
         othersInputs.put(player, new NetworkInputController());
     }
 
@@ -143,7 +141,6 @@ public class ServerController {
 
     public void startGame() {
         onConnect = false;
-        publishPlayersThread.interrupt();
         server.publish(new StartMessage(), null);
         onGame = true;
         publishGameThread.start();
